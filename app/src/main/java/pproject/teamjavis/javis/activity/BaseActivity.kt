@@ -8,7 +8,7 @@
 4. makeToast() 메소드를 통한 간편한 토스트 생성.
 5. makeSnackbar() 메소드를 통한 간편한 스낵바 생성.(확인 버튼이 있는 스낵바 생성 가능)
  */
-package pproject.teamjavis.javis.ui.activity
+package pproject.teamjavis.javis.activity
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle

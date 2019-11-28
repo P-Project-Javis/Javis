@@ -1,4 +1,4 @@
-package pproject.teamjavis.javis.ui.activity;
+package pproject.teamjavis.javis.activity;
 
 import android.os.Bundle;
 
