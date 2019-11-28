@@ -6,16 +6,14 @@
 3 .마이크 이미지 클릭시 녹음 활성화.
 4. 메뉴의 각 아이템 클릭시 각 액티비티로 이동.
  */
-package pproject.teamjavis.javis.activity;
+package pproject.teamjavis.javis.activity
 
-import android.os.Bundle;
+import android.os.Bundle
+import pproject.teamjavis.javis.R
 
-import pproject.teamjavis.javis.R;
-
-public class MainActivity extends BaseActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+class MainActivity: BaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
 }
