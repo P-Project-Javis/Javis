@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <ImageButton
+        android:id="@+id/topbar_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:background="@drawable/bg_round_button"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/topbar_activityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:textSize="25sp"
+        android:layout_margin="10dp"/>
+
+</LinearLayout>

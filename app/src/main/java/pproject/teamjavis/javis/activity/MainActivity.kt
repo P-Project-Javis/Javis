@@ -1,6 +1,8 @@
 /*
 메인 액티비티 클래스
 
+앱 시작화면 액티비티. 다른 액티비티로 이동하는 버튼과
+
 1. 메뉴 버튼 클릭시 메뉴 아이템 버튼들이 아래로 나옴.(이동 및 회전 애니메이션 적용 예정)
 2. 열린 메뉴버튼을 다시 클릭시 메뉴 아이템들이 들어감.
 3 .마이크 이미지 클릭시 녹음 활성화.
@@ -24,7 +26,7 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
 
-        menuButton.setOnClickListener {
+        main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
                 updateView(R.layout.activity_main_open)
             }
@@ -34,17 +36,17 @@ class MainActivity: BaseActivity() {
             isMenuOpen = !isMenuOpen
         }
 
-        settingButton.setOnClickListener {
+        main_settingButton.setOnClickListener {
             val intent = Intent(applicationContext, SettingActivity::class.java)
             startActivity(intent)
         }
 
-        newButton.setOnClickListener {
+        main_newButton.setOnClickListener {
             val intent = Intent(applicationContext, NewActivity::class.java)
             startActivity(intent)
         }
 
-        lockButton.setOnClickListener {
+        main_lockButton.setOnClickListener {
             val intent = Intent(applicationContext, LockActivity::class.java)
             startActivity(intent)
         }
