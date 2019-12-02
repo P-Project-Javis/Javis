@@ -9,11 +9,50 @@
 package pproject.teamjavis.javis.activity
 
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
+import android.view.animation.AccelerateInterpolator
+import androidx.constraintlayout.widget.ConstraintSet
+import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
 
 class MainActivity: BaseActivity() {
+    private var isMenuOpen = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_close)
+
+        menuButton.setOnClickListener {
+            if(!isMenuOpen) {
+                updateView(R.layout.activity_main_open)
+            }
+            else {
+                updateView(R.layout.activity_main_close)
+            }
+            isMenuOpen = !isMenuOpen
+        }
+
+        settingButton.setOnClickListener {
+            makeToast("설정")
+        }
+
+        newButton.setOnClickListener {
+            makeToast("추가")
+        }
+
+        lockButton.setOnClickListener {
+            makeToast("권한")
+        }
+    }
+
+    private fun updateView(id: Int) {
+        var targetConstSet = ConstraintSet()
+        targetConstSet.clone(this, id)
+        targetConstSet.applyTo(root)
+
+        var trans = ChangeBounds()
+        trans.interpolator = AccelerateInterpolator()
+        TransitionManager.beginDelayedTransition(root, trans)
     }
 }
