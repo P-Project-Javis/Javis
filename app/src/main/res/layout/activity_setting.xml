@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="설정"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/notice_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="공지사항"
+            android:textAlignment="viewStart"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/setUser_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용자 설정"
+            android:textAlignment="viewStart"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/setAuthority_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="권한설정"
+            android:textAlignment="viewStart"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/reset_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="초기화"
+            android:textAlignment="viewStart"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/help_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="도움말"
+            android:textAlignment="viewStart"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
