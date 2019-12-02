@@ -6,6 +6,7 @@
 package pproject.teamjavis.javis.activity
 
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 
@@ -18,5 +19,7 @@ class SettingActivity: BaseActivity() {
         topbar_backButton.setOnClickListener {
             finish()
         }
+
+        setting_appVersion.text = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
     }
 }

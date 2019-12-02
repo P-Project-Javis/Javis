@@ -7,70 +7,183 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <include layout="@layout/layout_topbar"/>
+    <include android:id="@+id/setting_toolbar"
+        layout="@layout/layout_topbar"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/setting_toolbar">
 
-        <TextView
-            android:id="@+id/headline"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="설정"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:paddingBottom="64dp">
 
-        <Button
-            android:id="@+id/notice_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="공지사항"
-            android:textAlignment="viewStart"
-            android:textSize="24sp" />
+            <LinearLayout
+                android:id="@+id/setting_list1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_layout"
+                app:layout_constraintTop_toBottomOf="@+id/setting_toolbar"
+                android:padding="10dp"
+                android:layout_margin="20dp">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="앱 정보"
+                    android:textSize="20sp"/>
 
-        <Button
-            android:id="@+id/setUser_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="사용자 설정"
-            android:textAlignment="viewStart"
-            android:textSize="24sp" />
+                <GridLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="10dp">
 
-        <Button
-            android:id="@+id/setAuthority_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="권한설정"
-            android:textAlignment="viewStart"
-            android:textSize="24sp" />
+                    <TextView android:text="앱 이름"
+                        android:layout_gravity="left"/>
+                    <TextView android:text="@string/app_name"
+                        android:layout_gravity="right"/>
 
-        <Button
-            android:id="@+id/reset_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="초기화"
-            android:textAlignment="viewStart"
-            android:textSize="24sp" />
+                    <TextView android:text="앱 버전"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:id="@+id/setting_appVersion"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+                    <TextView android:text="개발자"
+                        android:layout_columnSpan="2"
+                        android:layout_gravity="fill_horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="30dp"/>
 
-        <Button
-            android:id="@+id/help_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="도움말"
-            android:textAlignment="viewStart"
-            android:textSize="24sp" />
+                    <TextView android:text="팀장"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:text="entimer"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"/>
 
-    </LinearLayout>
+                    <TextView android:text="팀원"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:text="ohyeah2580"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView android:text="팀원"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:text="jjimin327"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView android:text="팀원"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:text="Minsu-Bae"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"/>
+
+                </GridLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setting_list2"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_layout"
+                app:layout_constraintTop_toBottomOf="@+id/setting_list1"
+                android:padding="10dp"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="사용자"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/setting_lookup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="사용자 목록 조회"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/setting_newUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="사용자 추가"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/setting_editUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="사용자 수정"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/setting_removeUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="사용자 삭제"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/setting_clearUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="사용자 목록 초기화"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setting_list3"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_layout"
+                app:layout_constraintTop_toBottomOf="@+id/setting_list2"
+                android:padding="10dp"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="소리"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/setting_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="음량"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
