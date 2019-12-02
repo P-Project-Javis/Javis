@@ -21,5 +21,17 @@ class SettingActivity: BaseActivity() {
         }
 
         setting_appVersion.text = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
+
+        setting_lookup.setOnClickListener { makeToast("조회") }
+
+        setting_newUser.setOnClickListener { makeToast("추가") }
+
+        setting_editUser.setOnClickListener { makeToast("수정") }
+
+        setting_removeUser.setOnClickListener { makeToast("삭제") }
+
+        setting_clearUser.setOnClickListener { makeToast("초기화") }
+
+        setting_volume.setOnClickListener { makeToast("볼륨") }
     }
 }
