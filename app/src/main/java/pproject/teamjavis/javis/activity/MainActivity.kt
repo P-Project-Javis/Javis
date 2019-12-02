@@ -8,6 +8,7 @@
  */
 package pproject.teamjavis.javis.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
@@ -38,11 +39,13 @@ class MainActivity: BaseActivity() {
         }
 
         newButton.setOnClickListener {
-            makeToast("추가")
+            val intent = Intent(applicationContext, NewActivity::class.java)
+            startActivity(intent)
         }
 
         lockButton.setOnClickListener {
-            makeToast("권한")
+            val intent = Intent(applicationContext, LockActivity::class.java)
+            startActivity(intent)
         }
     }
 
