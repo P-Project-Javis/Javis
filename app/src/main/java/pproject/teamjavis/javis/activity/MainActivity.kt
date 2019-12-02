@@ -26,7 +26,7 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
 
-        menuButton.setOnClickListener {
+        main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
                 updateView(R.layout.activity_main_open)
             }
@@ -36,17 +36,17 @@ class MainActivity: BaseActivity() {
             isMenuOpen = !isMenuOpen
         }
 
-        settingButton.setOnClickListener {
+        main_settingButton.setOnClickListener {
             val intent = Intent(applicationContext, SettingActivity::class.java)
             startActivity(intent)
         }
 
-        newButton.setOnClickListener {
+        main_newButton.setOnClickListener {
             val intent = Intent(applicationContext, NewActivity::class.java)
             startActivity(intent)
         }
 
-        lockButton.setOnClickListener {
+        main_lockButton.setOnClickListener {
             val intent = Intent(applicationContext, LockActivity::class.java)
             startActivity(intent)
         }

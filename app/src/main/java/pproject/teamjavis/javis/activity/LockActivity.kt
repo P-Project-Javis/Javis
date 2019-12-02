@@ -13,9 +13,9 @@ class LockActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lock)
-        activityTitle.text = resources.getString(R.string.title_lock)
+        topbar_activityTitle.text = resources.getString(R.string.title_lock)
 
-        backButton.setOnClickListener {
+        topbar_backButton.setOnClickListener {
             finish()
         }
     }

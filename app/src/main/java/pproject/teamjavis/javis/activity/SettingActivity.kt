@@ -13,9 +13,9 @@ class SettingActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-        activityTitle.text = resources.getString(R.string.title_setting)
+        topbar_activityTitle.text = resources.getString(R.string.title_setting)
 
-        backButton.setOnClickListener {
+        topbar_backButton.setOnClickListener {
             finish()
         }
     }
