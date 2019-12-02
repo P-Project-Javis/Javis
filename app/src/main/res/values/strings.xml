@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Javis</string>
 
+    <string name="title_setting">설정</string>
+    <string name="title_new">새 사용자 등록</string>
+    <string name="title_lock">사용자 권한 설정</string>
+
     <string name="message_default">마이크 이미지를 누르고 말해주세요</string>
 </resources>

@@ -1,7 +1,7 @@
 /*
-새 사용자 등록 액티비티.
+권한 설정 액티비티 클래스.
 
-해당 앱을 사용한 새 사용자를 등록할 수 있는 액티비티. 새 사용자 등록 시 권한 설정도 가능.
+등록된 사용자의 권한 설정을 담당하는 클래스. 권한이 없는 행동은 명령 불가.
  */
 package pproject.teamjavis.javis.activity
 
@@ -9,11 +9,11 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 
-class NewActivity: BaseActivity() {
+class LockActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new)
-        activityTitle.text = resources.getString(R.string.title_new)
+        setContentView(R.layout.activity_lock)
+        activityTitle.text = resources.getString(R.string.title_lock)
 
         backButton.setOnClickListener {
             finish()
