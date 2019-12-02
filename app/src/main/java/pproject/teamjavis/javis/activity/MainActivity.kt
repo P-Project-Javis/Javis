@@ -35,7 +35,8 @@ class MainActivity: BaseActivity() {
         }
 
         settingButton.setOnClickListener {
-            makeToast("설정")
+            val intent = Intent(applicationContext, SettingActivity::class.java)
+            startActivity(intent)
         }
 
         newButton.setOnClickListener {
