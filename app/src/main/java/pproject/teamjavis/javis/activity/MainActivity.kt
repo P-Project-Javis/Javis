@@ -9,32 +9,50 @@
 package pproject.teamjavis.javis.activity
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
+import android.view.animation.AccelerateInterpolator
+import androidx.constraintlayout.widget.ConstraintSet
+import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
-import pproject.teamjavis.javis.animation.AnimationManager
 
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
-    private val anim = AnimationManager(applicationContext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_close)
 
         menuButton.setOnClickListener {
             if(!isMenuOpen) {
-                it.startAnimation(anim.animMenuButton)
-                settingButton.startAnimation(anim.animSettingButton)
-                newButton.startAnimation(anim.animNewButton)
-                lockButton.startAnimation(anim.animLockButton)
+                updateView(R.layout.activity_main_open)
             }
             else {
-                it.startAnimation(anim.animMenuButtonRewind)
-                settingButton.startAnimation(anim.animSettingButtonRewind)
-                newButton.startAnimation(anim.animNewButtonRewind)
-                lockButton.startAnimation(anim.animLockButtonRewind)
+                updateView(R.layout.activity_main_close)
             }
             isMenuOpen = !isMenuOpen
         }
+
+        settingButton.setOnClickListener {
+            makeToast("설정")
+        }
+
+        newButton.setOnClickListener {
+            makeToast("추가")
+        }
+
+        lockButton.setOnClickListener {
+            makeToast("권한")
+        }
+    }
+
+    private fun updateView(id: Int) {
+        var targetConstSet = ConstraintSet()
+        targetConstSet.clone(this, id)
+        targetConstSet.applyTo(root)
+
+        var trans = ChangeBounds()
+        trans.interpolator = AccelerateInterpolator()
+        TransitionManager.beginDelayedTransition(root, trans)
     }
 }
