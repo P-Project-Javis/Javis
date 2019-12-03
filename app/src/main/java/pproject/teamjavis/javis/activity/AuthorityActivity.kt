@@ -6,8 +6,12 @@
 package pproject.teamjavis.javis.activity
 
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_authority.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.adapter.AuthorityListAdapter
+import pproject.teamjavis.javis.item.AuthorityChildItem
+import pproject.teamjavis.javis.item.AuthorityParentItem
 
 class AuthorityActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +21,30 @@ class AuthorityActivity: BaseActivity() {
 
         topbar_backButton.setOnClickListener { finish() }
 
-        //ExpandableListView를 사용해 구현할 예정
+        val adapter = AuthorityListAdapter()
+        authority_list.setAdapter(adapter)
+        adapter.add(makeData())
+    }
+
+    private fun makeData(): ArrayList<AuthorityParentItem> {
+        val data = ArrayList<AuthorityParentItem>()
+
+        val names = ArrayList<String>()
+        names.add("엄마")
+        names.add("아빠")
+        names.add("첫째")
+        names.add("둘째")
+
+        val authorityList = ArrayList<AuthorityChildItem>()
+        authorityList.add(AuthorityChildItem(resources.getDrawable(R.drawable.ic_tv_black_24dp), "TV", true))
+        authorityList.add(AuthorityChildItem(resources.getDrawable(R.drawable.ic_lightbulb_outline_black_24dp), "조명", true))
+        authorityList.add(AuthorityChildItem(resources.getDrawable(R.drawable.ic_burner_black_24dp), "가스레인지", false))
+        authorityList.add(AuthorityChildItem(resources.getDrawable(R.drawable.ic_shopping_cart_black_24dp), "온라인 주문", false))
+
+        for(name in names) {
+            data.add(AuthorityParentItem(name, authorityList))
+        }
+
+        return data
     }
 }
