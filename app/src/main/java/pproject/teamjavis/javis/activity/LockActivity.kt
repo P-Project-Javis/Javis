@@ -18,5 +18,7 @@ class LockActivity: BaseActivity() {
         topbar_backButton.setOnClickListener {
             finish()
         }
+
+        //ExpandableListView를 사용해 구현할 예정
     }
 }
