@@ -186,6 +186,51 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/setting_list4"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_layout"
+                android:padding="10dp"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="오픈소스 라이브러리"
+                    android:textSize="25sp"/>
+
+                <GridLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="10dp">
+
+                    <TextView android:text="이름"
+                        android:layout_gravity="left"/>
+                    <TextView android:text="저작자"
+                        android:layout_gravity="center"/>
+                    <TextView android:text="라이선스"
+                        android:layout_gravity="right"/>
+
+                    <TextView android:text="Material Components"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:text="Google"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"/>
+                    <TextView android:text="Apache 2.0"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"/>
+
+                </GridLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
