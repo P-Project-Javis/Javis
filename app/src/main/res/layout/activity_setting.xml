@@ -92,6 +92,12 @@
                         android:layout_gravity="right"
                         android:layout_marginTop="10dp"/>
 
+                    <TextView android:text="Copyright 2019 Team Javis\nLicensed Under Apache License 2.0"
+                        android:layout_columnSpan="2"
+                        android:layout_gravity="fill_horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"/>
+
                 </GridLayout>
 
             </LinearLayout>
