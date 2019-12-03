@@ -5,6 +5,7 @@
  */
 package pproject.teamjavis.javis.activity
 
+import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_topbar.*
@@ -22,7 +23,10 @@ class SettingActivity: BaseActivity() {
 
         setting_lookup.setOnClickListener { makeToast("조회") }
 
-        setting_adduser.setOnClickListener { makeToast("추가") }
+        setting_adduser.setOnClickListener {
+            val intent = Intent(applicationContext, AdduserActivity::class.java)
+            startActivity(intent)
+        }
 
         setting_editUser.setOnClickListener { makeToast("수정") }
 

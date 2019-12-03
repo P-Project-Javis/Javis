@@ -112,50 +112,50 @@
                     android:text="사용자"
                     android:textSize="25sp"/>
 
-                <TextView
+                <Button
                     android:id="@+id/setting_lookup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사용자 목록 조회"
                     android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    style="?android:attr/borderlessButtonStyle"/>
 
-                <TextView
+                <Button
                     android:id="@+id/setting_adduser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사용자 추가"
                     android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    style="?android:attr/borderlessButtonStyle"/>
 
-                <TextView
+                <Button
                     android:id="@+id/setting_editUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사용자 수정"
                     android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    style="?android:attr/borderlessButtonStyle"/>
 
-                <TextView
+                <Button
                     android:id="@+id/setting_removeUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사용자 삭제"
                     android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    style="?android:attr/borderlessButtonStyle"/>
 
-                <TextView
+                <Button
                     android:id="@+id/setting_clearUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사용자 목록 초기화"
                     android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </LinearLayout>
 
@@ -175,14 +175,14 @@
                     android:text="소리"
                     android:textSize="25sp"/>
 
-                <TextView
+                <Button
                     android:id="@+id/setting_volume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="음량"
                     android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </LinearLayout>
 
