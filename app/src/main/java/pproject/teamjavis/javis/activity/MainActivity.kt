@@ -41,13 +41,13 @@ class MainActivity: BaseActivity() {
             startActivity(intent)
         }
 
-        main_newButton.setOnClickListener {
-            val intent = Intent(applicationContext, NewActivity::class.java)
+        main_adduserButton.setOnClickListener {
+            val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
 
         main_lockButton.setOnClickListener {
-            val intent = Intent(applicationContext, LockActivity::class.java)
+            val intent = Intent(applicationContext, AuthorityActivity::class.java)
             startActivity(intent)
         }
     }

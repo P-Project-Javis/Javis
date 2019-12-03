@@ -33,7 +33,7 @@
         android:layout_marginTop="20dp"/>
 
     <ImageButton
-        android:id="@+id/main_newButton"
+        android:id="@+id/main_adduserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_black_24dp"

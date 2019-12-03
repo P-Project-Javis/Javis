@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.NewActivity">
+    tools:context=".activity.AdduserActivity">
 
     <ImageView
-        android:id="@+id/new_mic"
+        android:id="@+id/adduser_mic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_mic_none_black_24dp"
@@ -19,33 +19,33 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginHorizontal="50dp"/>
 
-    <include android:id="@+id/new_toolbar"
+    <include android:id="@+id/adduser_topbar"
         layout="@layout/layout_topbar"/>
 
     <TextView
-        android:id="@+id/main_message"
+        android:id="@+id/adduser_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/message_new_voice"
         android:textSize="25sp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/new_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/adduser_topbar"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="50dp"/>
 
     <EditText
-        android:id="@+id/new_input"
+        android:id="@+id/adduser_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="이름"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/new_confirmButton"
+        app:layout_constraintBottom_toTopOf="@+id/adduser_confirmButton"
         android:layout_marginBottom="30dp"
         android:layout_marginHorizontal="10dp"/>
 
     <ImageButton
-        android:id="@+id/new_confirmButton"
+        android:id="@+id/adduser_confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_black_24dp"

@@ -9,15 +9,13 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 
-class LockActivity: BaseActivity() {
+class AuthorityActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lock)
+        setContentView(R.layout.activity_authority)
         topbar_activityTitle.text = resources.getString(R.string.title_lock)
 
-        topbar_backButton.setOnClickListener {
-            finish()
-        }
+        topbar_backButton.setOnClickListener { finish() }
 
         //ExpandableListView를 사용해 구현할 예정
     }

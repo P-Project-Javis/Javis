@@ -9,14 +9,12 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 
-class NewActivity: BaseActivity() {
+class AdduserActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new)
+        setContentView(R.layout.activity_adduser)
         topbar_activityTitle.text = resources.getString(R.string.title_new)
 
-        topbar_backButton.setOnClickListener {
-            finish()
-        }
+        topbar_backButton.setOnClickListener { finish() }
     }
 }

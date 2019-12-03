@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SettingActivity"/>
-        <activity android:name=".activity.NewActivity"/>
-        <activity android:name=".activity.LockActivity"/>
+        <activity android:name=".activity.AdduserActivity"/>
+        <activity android:name=".activity.AuthorityActivity"/>
     </application>
 
 </manifest>

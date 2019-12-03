@@ -16,15 +16,13 @@ class SettingActivity: BaseActivity() {
         setContentView(R.layout.activity_setting)
         topbar_activityTitle.text = resources.getString(R.string.title_setting)
 
-        topbar_backButton.setOnClickListener {
-            finish()
-        }
+        topbar_backButton.setOnClickListener { finish() }
 
         setting_appVersion.text = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
 
         setting_lookup.setOnClickListener { makeToast("조회") }
 
-        setting_newUser.setOnClickListener { makeToast("추가") }
+        setting_adduser.setOnClickListener { makeToast("추가") }
 
         setting_editUser.setOnClickListener { makeToast("수정") }
 
