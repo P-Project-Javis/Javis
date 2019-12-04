@@ -10,235 +10,89 @@
     <include android:id="@+id/setting_topbar"
         layout="@layout/layout_topbar"/>
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/setting_wrap"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/setting_topbar">
+        android:layout_height="0dp"
+        android:background="@drawable/bg_round_layout"
+        app:layout_constraintTop_toBottomOf="@+id/setting_topbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        android:layout_margin="20dp">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="64dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/setting_list1"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_round_layout"
-                android:padding="10dp"
-                android:layout_margin="20dp">
+                android:layout_height="match_parent">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="앱 정보"
-                    android:textSize="25sp"/>
-
-                <GridLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="10dp">
-
-                    <TextView android:text="앱 이름"
-                        android:layout_gravity="left"/>
-                    <TextView android:text="@string/app_name"
-                        android:layout_gravity="right"/>
-
-                    <TextView android:text="앱 버전"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:id="@+id/setting_appVersion"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView android:text="개발자"
-                        android:layout_columnSpan="2"
-                        android:layout_gravity="fill_horizontal"
-                        android:gravity="center"
-                        android:textSize="20sp"
-                        android:layout_marginTop="30dp"/>
-
-                    <TextView android:text="팀장"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:text="entimer"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView android:text="팀원"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:text="ohyeah2580"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView android:text="팀원"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:text="jjimin327"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView android:text="팀원"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:text="Minsu-Bae"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView android:text="Copyright 2019 Team Javis\nLicensed Under Apache License 2.0"
-                        android:layout_columnSpan="2"
-                        android:layout_gravity="fill_horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="10dp"/>
-
-                </GridLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/setting_list2"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_round_layout"
-                android:padding="10dp"
-                android:layout_margin="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="사용자"
-                    android:textSize="25sp"/>
+                    android:text="사용자 설정"
+                    style="@style/SettingTitleStyle"/>
 
                 <Button
                     android:id="@+id/setting_lookup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="사용자 목록 조회"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_adduser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="사용자 추가"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_editUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="사용자 수정"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_removeUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="사용자 삭제"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_clearUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="사용자 목록 초기화"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/setting_list3"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_round_layout"
-                android:padding="10dp"
-                android:layout_margin="20dp">
+                <include layout="@layout/layout_horizontal_line"/>
 
                 <TextView
+                    android:text="앱 정보"
+                    style="@style/SettingTitleStyle"/>
+
+                <TextView
+                    android:id="@+id/setting_appVersion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="소리"
-                    android:textSize="25sp"/>
+                    android:gravity="left"
+                    android:text="Javis 버전: "
+                    android:textSize="18sp"
+                    android:padding="10dp"/>
 
                 <Button
-                    android:id="@+id/setting_volume"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="음량"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:id="@+id/setting_developer"
+                    android:text="개발자"
+                    style="@style/SettingButtonStyle"/>
 
-            </LinearLayout>
+                <Button
+                    android:id="@+id/setting_license"
+                    android:text="라이선스"
+                    style="@style/SettingButtonStyle"/>
 
-            <LinearLayout
-                android:id="@+id/setting_list4"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_round_layout"
-                android:padding="10dp"
-                android:layout_margin="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                <Button
+                    android:id="@+id/setting_openSource"
                     android:text="오픈소스 라이브러리"
-                    android:textSize="25sp"/>
-
-                <GridLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:columnCount="3"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="10dp">
-
-                    <TextView android:text="이름"
-                        android:layout_gravity="left"/>
-                    <TextView android:text="저작자"
-                        android:layout_gravity="center"/>
-                    <TextView android:text="라이선스"
-                        android:layout_gravity="right"/>
-
-                    <TextView android:text="Material Components"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:text="Google"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"/>
-                    <TextView android:text="Apache 2.0"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="10dp"/>
-
-                </GridLayout>
+                    style="@style/SettingButtonStyle"/>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
