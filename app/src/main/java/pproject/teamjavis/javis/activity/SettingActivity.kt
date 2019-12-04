@@ -7,6 +7,7 @@ package pproject.teamjavis.javis.activity
 
 import android.content.Intent
 import android.os.Bundle
+import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
@@ -26,10 +27,13 @@ class SettingActivity: BaseActivity() {
         }
         setting_editUser.setOnClickListener { makeToast("수정") }
         setting_removeUser.setOnClickListener { makeToast("삭제") }
+        setting_clearUser.setOnClickListener { makeToast("초기화") }
 
         setting_appVersion.text = "Javis 버전: " + applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
         setting_developer.setOnClickListener { makeToast("개발자") }
         setting_license.setOnClickListener { makeToast("라이선스") }
-        setting_openSource.setOnClickListener { makeToast("오픈소스 라이브러리") }
+        setting_openSource.setOnClickListener {
+            LibsBuilder().start(applicationContext)
+        }
     }
 }
