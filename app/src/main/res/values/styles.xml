@@ -9,4 +9,20 @@
         <item name="android:textColor">@color/colorAccentDark</item>
     </style>
 
+    <style name="SettingTitleStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="SettingButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorElevation</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 </resources>
