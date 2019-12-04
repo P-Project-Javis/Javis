@@ -21,6 +21,7 @@ import pproject.teamjavis.javis.R
 
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
+    private var isRecording = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +38,28 @@ class MainActivity: BaseActivity() {
         }
 
         main_settingButton.setOnClickListener {
+            stopRecording()
             val intent = Intent(applicationContext, SettingActivity::class.java)
             startActivity(intent)
         }
 
         main_adduserButton.setOnClickListener {
+            stopRecording()
             val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
 
         main_lockButton.setOnClickListener {
+            stopRecording()
             val intent = Intent(applicationContext, AuthorityActivity::class.java)
             startActivity(intent)
+        }
+
+        main_mic.setOnClickListener {
+            if(!isRecording)
+                startRecording()
+            else
+                stopRecording()
         }
     }
 
@@ -60,5 +71,17 @@ class MainActivity: BaseActivity() {
         var trans = ChangeBounds()
         trans.interpolator = AccelerateInterpolator()
         TransitionManager.beginDelayedTransition(root, trans)
+    }
+
+    private fun startRecording() {
+        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_24dp))
+        main_message.text = resources.getText(R.string.message_recording)
+        isRecording = true
+    }
+
+    private fun stopRecording() {
+        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_24dp))
+        main_message.text = resources.getText(R.string.message_notrecording)
+        isRecording = false
     }
 }

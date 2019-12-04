@@ -72,7 +72,7 @@
         android:id="@+id/main_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/message_default"
+        android:text="@string/message_notrecording"
         android:textSize="25sp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
