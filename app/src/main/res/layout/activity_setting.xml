@@ -31,65 +31,39 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="사용자 설정"
-                    android:textSize="25sp"/>
+                    style="@style/SettingTitleStyle"/>
 
                 <Button
                     android:id="@+id/setting_lookup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:text="사용자 목록 조회"
-                    android:gravity="left"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_adduser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="사용자 추가"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_editUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="사용자 수정"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_removeUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="사용자 삭제"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_clearUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="사용자 목록 초기화"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <include layout="@layout/layout_horizontal_line"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="앱 정보"
-                    android:textSize="25sp"/>
+                    style="@style/SettingTitleStyle"/>
 
                 <TextView
                     android:id="@+id/setting_appVersion"
@@ -102,30 +76,18 @@
 
                 <Button
                     android:id="@+id/setting_developer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="개발자"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_license"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="라이선스"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
                 <Button
                     android:id="@+id/setting_openSource"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:text="오픈소스 라이브러리"
-                    android:textSize="18sp"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/SettingButtonStyle"/>
 
             </LinearLayout>
 
