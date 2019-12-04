@@ -18,10 +18,12 @@ import android.view.animation.AccelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.VoiceRecorder
 
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
     private var isRecording = false
+    private val recorder = VoiceRecorder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,12 +76,14 @@ class MainActivity: BaseActivity() {
     }
 
     private fun startRecording() {
+        recorder.startRecord()
         main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_24dp))
         main_message.text = resources.getText(R.string.message_recording)
         isRecording = true
     }
 
     private fun stopRecording() {
+        recorder.stopRecord()
         main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_24dp))
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
