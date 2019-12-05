@@ -23,11 +23,13 @@ import pproject.teamjavis.javis.util.VoiceRecorder
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
     private var isRecording = false
-    private val recorder = VoiceRecorder()
+    private var recorder: VoiceRecorder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
+
+        recorder = VoiceRecorder(applicationContext)
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
@@ -76,14 +78,14 @@ class MainActivity: BaseActivity() {
     }
 
     private fun startRecording() {
-        recorder.startRecord()
+        recorder!!.startRecord()
         main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_24dp))
         main_message.text = resources.getText(R.string.message_recording)
         isRecording = true
     }
 
     private fun stopRecording() {
-        recorder.stopRecord()
+        recorder!!.stopRecord()
         main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_24dp))
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false

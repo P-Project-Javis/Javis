@@ -5,18 +5,21 @@
  */
 package pproject.teamjavis.javis.util;
 
+import android.content.Context;
 import android.media.MediaRecorder;
-import android.os.Environment;
 
+import java.io.File;
 import java.io.IOException;
 
 public class VoiceRecorder {
     private MediaRecorder recorder;
-    private String tempFileName;
+    private String filePath;
 
-    public VoiceRecorder() {
+    public VoiceRecorder(Context context) {
         recorder = null;
-        tempFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/order.mp4";
+
+        File file = new File(context.getFilesDir(), "order.mp4");
+        filePath = file.getAbsolutePath();
     }
 
     public void startRecord() {
@@ -26,7 +29,7 @@ public class VoiceRecorder {
         recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 
-        recorder.setOutputFile(tempFileName);
+        recorder.setOutputFile(filePath);
 
         try {
             recorder.prepare();
