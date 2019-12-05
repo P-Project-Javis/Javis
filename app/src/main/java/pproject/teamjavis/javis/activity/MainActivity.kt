@@ -18,13 +18,18 @@ import android.view.animation.AccelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.VoiceRecorder
 
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
+    private var isRecording = false
+    private var recorder: VoiceRecorder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
+
+        recorder = VoiceRecorder(applicationContext, "order")
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
@@ -37,18 +42,28 @@ class MainActivity: BaseActivity() {
         }
 
         main_settingButton.setOnClickListener {
+            stopRecording()
             val intent = Intent(applicationContext, SettingActivity::class.java)
             startActivity(intent)
         }
 
         main_adduserButton.setOnClickListener {
+            stopRecording()
             val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
 
         main_lockButton.setOnClickListener {
+            stopRecording()
             val intent = Intent(applicationContext, AuthorityActivity::class.java)
             startActivity(intent)
+        }
+
+        main_mic.setOnClickListener {
+            if(!isRecording)
+                startRecording()
+            else
+                stopRecording()
         }
     }
 
@@ -60,5 +75,19 @@ class MainActivity: BaseActivity() {
         var trans = ChangeBounds()
         trans.interpolator = AccelerateInterpolator()
         TransitionManager.beginDelayedTransition(root, trans)
+    }
+
+    private fun startRecording() {
+        recorder!!.startRecord()
+        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_24dp))
+        main_message.text = resources.getText(R.string.message_recording)
+        isRecording = true
+    }
+
+    private fun stopRecording() {
+        recorder!!.stopRecord()
+        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_24dp))
+        main_message.text = resources.getText(R.string.message_notrecording)
+        isRecording = false
     }
 }
