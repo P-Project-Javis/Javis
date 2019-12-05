@@ -30,7 +30,10 @@
             android:id="@+id/adduser_inputName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"/>
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:hint="이름"
+            android:textSize="25sp"/>
 
         <ImageButton
             android:id="@+id/adduser_nextButton"
