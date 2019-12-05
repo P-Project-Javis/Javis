@@ -22,6 +22,30 @@
     <include android:id="@+id/adduser_topbar"
         layout="@layout/layout_topbar"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/adduser_topbar"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:id="@+id/adduser_checker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mic_black_24dp"
+            android:background="@drawable/bg_round_button"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/adduser_checker2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_text_fields_black_24dp"
+            android:background="@drawable/bg_round_button"/>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/adduser_message"
         android:layout_width="match_parent"

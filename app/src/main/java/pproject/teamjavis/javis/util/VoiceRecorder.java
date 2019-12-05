@@ -15,10 +15,10 @@ public class VoiceRecorder {
     private MediaRecorder recorder;
     private String filePath;
 
-    public VoiceRecorder(Context context) {
+    public VoiceRecorder(Context context, String fileName) {
         recorder = null;
 
-        File file = new File(context.getFilesDir(), "order.mp4");
+        File file = new File(context.getFilesDir(), fileName + ".mp4");
         filePath = file.getAbsolutePath();
     }
 

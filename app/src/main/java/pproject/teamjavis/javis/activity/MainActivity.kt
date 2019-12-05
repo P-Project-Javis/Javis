@@ -29,7 +29,7 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
 
-        recorder = VoiceRecorder(applicationContext)
+        recorder = VoiceRecorder(applicationContext, "order")
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
