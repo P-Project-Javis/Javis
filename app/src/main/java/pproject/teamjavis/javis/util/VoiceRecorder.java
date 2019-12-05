@@ -6,6 +6,7 @@
 package pproject.teamjavis.javis.util;
 
 import android.media.MediaRecorder;
+import android.os.Environment;
 
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ public class VoiceRecorder {
 
     public VoiceRecorder() {
         recorder = null;
-        tempFileName = "voiceTemp.mp4";
+        tempFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/order.mp4";
     }
 
     public void startRecord() {
