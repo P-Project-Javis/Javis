@@ -79,14 +79,14 @@ class MainActivity: BaseActivity() {
 
     private fun startRecording() {
         recorder!!.startRecord()
-        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_24dp))
+        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_48dp))
         main_message.text = resources.getText(R.string.message_recording)
         isRecording = true
     }
 
     private fun stopRecording() {
         recorder!!.stopRecord()
-        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_24dp))
+        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_48dp))
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
     }

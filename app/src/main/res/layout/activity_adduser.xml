@@ -7,77 +7,104 @@
     android:layout_height="match_parent"
     tools:context=".activity.AdduserActivity">
 
-    <ImageView
-        android:id="@+id/adduser_mic"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_mic_none_black_24dp"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="50dp"/>
-
     <include android:id="@+id/adduser_topbar"
         layout="@layout/layout_topbar"/>
 
     <LinearLayout
+        android:id="@+id/adduser_nameWrap"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
+        android:background="@drawable/bg_round_layout"
         app:layout_constraintTop_toBottomOf="@+id/adduser_topbar"
-        android:layout_marginTop="15dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        android:layout_margin="20dp">
 
-        <ImageView
-            android:id="@+id/adduser_checker1"
+        <TextView
+            android:text="이름을 입력하세요"
+            style="@style/SettingTitleStyle"/>
+
+        <EditText
+            android:id="@+id/adduser_inputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"/>
+
+        <ImageButton
+            android:id="@+id/adduser_nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_mic_black_24dp"
+            android:src="@drawable/ic_arrow_forward_black_48dp"
             android:background="@drawable/bg_round_button"
-            android:layout_marginRight="10dp"/>
-
-        <ImageView
-            android:id="@+id/adduser_checker2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_text_fields_black_24dp"
-            android:background="@drawable/bg_round_button"/>
+            android:padding="10dp"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/adduser_message"
+    <LinearLayout
+        android:id="@+id/adduser_voiceWrap"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/message_new_voice"
-        android:textSize="25sp"
+        android:layout_height="0dp"
         android:gravity="center"
+        android:background="@drawable/bg_round_layout"
         app:layout_constraintTop_toBottomOf="@+id/adduser_topbar"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="50dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:visibility="gone">
 
-    <EditText
-        android:id="@+id/adduser_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="이름"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/adduser_confirmButton"
-        android:layout_marginBottom="30dp"
-        android:layout_marginHorizontal="10dp"/>
+        <TextView
+            android:text="목소리를 녹음하세요"
+            style="@style/SettingTitleStyle"/>
 
-    <ImageButton
-        android:id="@+id/adduser_confirmButton"
+        <ImageButton
+            android:id="@+id/adduser_recordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mic_none_black_48dp"
+            android:background="@drawable/bg_round_button"
+            android:padding="10dp"
+            android:layout_margin="30dp"/>
+
+        <ImageButton
+            android:id="@+id/adduser_confirmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_black_48dp"
+            android:background="@drawable/bg_round_button"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adduser_checkerWrap"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_black_24dp"
-        android:background="@drawable/bg_round_button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adduser_topbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:padding="10dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/adduser_nameChecker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+            android:background="@drawable/bg_round_button"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/adduser_voiceChecker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+            android:background="@drawable/bg_round_button"
+            android:padding="5dp"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

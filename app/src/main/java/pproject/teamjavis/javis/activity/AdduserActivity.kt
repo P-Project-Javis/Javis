@@ -6,6 +6,8 @@
 package pproject.teamjavis.javis.activity
 
 import android.os.Bundle
+import android.view.View
+import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 
@@ -16,5 +18,7 @@ class AdduserActivity: BaseActivity() {
         topbar_activityTitle.text = resources.getString(R.string.title_new)
 
         topbar_backButton.setOnClickListener { finish() }
+
+        adduser_voiceWrap.visibility = View.GONE
     }
 }
