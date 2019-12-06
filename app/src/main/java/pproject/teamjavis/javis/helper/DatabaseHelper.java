@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE USERINFO (_id INTEGER PRIMARY KEY AUTOINCREMENT, "+"name TEXT NOT NULL, voice INTEGER, tv INTEGER, light INTEGER, gas INTEGER, buy INTEGER DEFAULT 0);");
+        db.execSQL("CREATE TABLE USERINFO (name TEXT NOT NULL, voice INTEGER, tv INTEGER, light INTEGER, gas INTEGER, buy INTEGER);");
     }
 
     @Override
@@ -23,7 +23,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public void insert(String name, int voice, int tv, int light, int gas, int buy){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO USERINFO VALUES(null, " + "'" + name +"', " + voice + ", '" + tv + ", '" + light + ", '" + gas + ", '" + buy +"');");
+        db.execSQL("INSERT INTO USERINFO VALUES(" + "'" + name +"', " + voice + ", '" + tv + ", '" + light + ", '" + gas + ", '" + buy +"');");
+        db.close();
+    }
+
+    public void update(String name, int voice, int tv, int light, int gas, int buy){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE USERINFO SET voice = " + voice + ", tv = " + tv + ", light = " + light + ", gas = " + gas + ", buy = "+ buy + "WHERE name = '" + name + "');");
+        db.close();
+    }
+
+    public void delete(String name){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM USERINFO WHERE name='" + name + "';");
         db.close();
     }
 }
