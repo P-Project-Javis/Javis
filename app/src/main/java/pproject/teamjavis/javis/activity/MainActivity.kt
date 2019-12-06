@@ -21,6 +21,13 @@ import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.VoiceRecorder
 
 class MainActivity: BaseActivity() {
+<<<<<<< Updated upstream
+=======
+    companion object {
+        const val PERMISSION_REQUEST_RECORD_AUDIO = 1
+    }
+
+>>>>>>> Stashed changes
     private var isMenuOpen = false
     private var isRecording = false
     private var recorder: VoiceRecorder? = null
