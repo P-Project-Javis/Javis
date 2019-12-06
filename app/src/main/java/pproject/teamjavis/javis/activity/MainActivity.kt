@@ -10,17 +10,24 @@
  */
 package pproject.teamjavis.javis.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.animation.AccelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.VoiceRecorder
 
 class MainActivity: BaseActivity() {
+    companion object {
+        val PERMISSION_REQUEST_RECORD_AUDIO = 1
+    }
+
     private var isMenuOpen = false
     private var isRecording = false
     private var recorder: VoiceRecorder? = null
@@ -66,9 +73,28 @@ class MainActivity: BaseActivity() {
                 stopRecording()
         }
 
-        if(true) {
-            val intent = Intent(applicationContext, PermissionActivity::class.java)
-            startActivity(intent)
+        if(checkPermission() == PackageManager.PERMISSION_DENIED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), PERMISSION_REQUEST_RECORD_AUDIO)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            PERMISSION_REQUEST_RECORD_AUDIO -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    makeToast("승인했습니다.")
+                } else {
+                    makeToast("거부하셨습니다. 앱을 정상적으로 이용할 수 없습니다.")
+                    finish()
+                }
+                return
+            }
+            else -> {
+                makeToast("거부하셨습니다. 앱을 정상적으로 이용할 수 없습니다.")
+                finish()
+            }
         }
     }
 
