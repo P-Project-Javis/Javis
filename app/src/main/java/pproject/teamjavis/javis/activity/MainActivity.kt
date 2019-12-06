@@ -65,6 +65,11 @@ class MainActivity: BaseActivity() {
             else
                 stopRecording()
         }
+
+        if(true) {
+            val intent = Intent(applicationContext, PermissionActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun updateView(id: Int) {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/permission_item_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:tint="@color/colorAccent"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/permission_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/permission_item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"/>
+
+    </LinearLayout>
+
+</LinearLayout>
