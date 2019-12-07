@@ -88,8 +88,9 @@ open class BaseActivity: AppCompatActivity() {
     //권한 체크 메소드
     fun checkPermission(): Int {
         val micPermission = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.RECORD_AUDIO)
+        val writeStoragePermission = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-        if(micPermission == PackageManager.PERMISSION_GRANTED) {
+        if(micPermission == PackageManager.PERMISSION_GRANTED && writeStoragePermission == PackageManager.PERMISSION_GRANTED) {
             return PackageManager.PERMISSION_GRANTED
         }
         else {
