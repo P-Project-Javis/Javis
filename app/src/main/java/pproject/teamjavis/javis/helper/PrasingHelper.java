@@ -15,10 +15,7 @@ public class PrasingHelper {
        super.onCreate(savedInstanceState);
 
        try{
-           URL url = new URL("http://openapi.kepco.co.kr/service/evInfoService/getEvSearchList?"
-                   + "&pageNo=1&numOfRows=10&ServiceKey="
-                   + "iOsw4MlgRU0JZpvuR5AkLUfkX%2FAOl0Q03HF78VRzR2g0dz6iD0esiw6HmLHKly6PVvGVP2PPgRpqtpULJBWSHg%3D%3D"
-           ); //검색 URL부분
+           URL url = new URL(           ); //검색 URL부분
 
            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
            XmlPullParser parser = parserCreator.newPullParser();
