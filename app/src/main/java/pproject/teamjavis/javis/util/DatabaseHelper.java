@@ -39,6 +39,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + dbName + " SET voice = " + voice + ", tv = " + tv + ", light = " + light + ", gas = " + gas + ", buy = "+ buy + "WHERE name = '" + name + ";");
     }
 
+    public void select() {
+
+    }
+
+    public void selectAll() {
+
+    }
+
     public void delete(String name) {
         db.execSQL("DELETE FROM " + dbName + " WHERE name='" + name + "';");
     }

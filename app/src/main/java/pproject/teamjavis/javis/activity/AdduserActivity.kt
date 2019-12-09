@@ -5,7 +5,6 @@
  */
 package pproject.teamjavis.javis.activity
 
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
@@ -33,20 +32,27 @@ class AdduserActivity: BaseActivity() {
 
         adduser_nextButton.setOnClickListener {
             name = adduser_inputName.text.toString()
-
-            adduser_nameWrap.visibility = View.GONE
-            adduser_voiceWrap.visibility = View.VISIBLE
-            isNameChecked = true
-            adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
+            if(name != "") {
+                adduser_nameWrap.visibility = View.GONE
+                adduser_voiceWrap.visibility = View.VISIBLE
+                isNameChecked = true
+                adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
+            }
+            else
+                makeToast("한 글자 이상 입력하세요")
         }
 
         adduser_recordButton.setOnClickListener {
             if(!isRecording)
                 startRecording(name)
-            else
+            else {
                 stopRecording()
+                adduser_confirmButton.visibility = View.VISIBLE
+            }
+
         }
 
+        adduser_confirmButton.visibility = View.GONE
         adduser_confirmButton.setOnClickListener {
             if(isNameChecked && isVoiceChecked) {
                 addUser()
