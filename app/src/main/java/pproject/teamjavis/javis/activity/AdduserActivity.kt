@@ -5,11 +5,13 @@
  */
 package pproject.teamjavis.javis.activity
 
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.DatabaseHelper
 import pproject.teamjavis.javis.util.VoiceRecorder
 
 class AdduserActivity: BaseActivity() {
@@ -18,7 +20,7 @@ class AdduserActivity: BaseActivity() {
     private var isRecording = false
 
     private var name: String = "이름미지정"
-    private var recorder: VoiceRecorder? = null
+    private var recorder = VoiceRecorder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class AdduserActivity: BaseActivity() {
 
         adduser_confirmButton.setOnClickListener {
             if(isNameChecked && isVoiceChecked) {
+                addUser()
                 finish()
             }
         }
@@ -65,5 +68,14 @@ class AdduserActivity: BaseActivity() {
         isVoiceChecked = true
         adduser_voiceChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
         isRecording = false
+    }
+
+    private fun addUser() {
+        val db = DatabaseHelper(applicationContext)
+        val fileName = recorder!!.fileName
+
+        db.openWritable()
+        db.insert(name, fileName, 1, 1, 0, 0)
+        db.close()
     }
 }

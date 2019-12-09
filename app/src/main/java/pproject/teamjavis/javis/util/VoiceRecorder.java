@@ -23,6 +23,7 @@ import omrecorder.Recorder;
 
 public class VoiceRecorder {
     Recorder recorder;
+    String fileName;
 
     public void setupRecorder(String fileName) {
         recorder = OmRecorder.wav(
@@ -45,6 +46,10 @@ public class VoiceRecorder {
         }
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
     private PullableSource mic() {
         return new PullableSource.Default(
                 new AudioRecordConfig.Default(
@@ -56,6 +61,7 @@ public class VoiceRecorder {
         File filePath = new File(Environment.getExternalStorageDirectory(), "/Javis");
         if(!filePath.exists())
             filePath.mkdir();
+        this.fileName = fileName + ".wav";
         return new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
     }
 }

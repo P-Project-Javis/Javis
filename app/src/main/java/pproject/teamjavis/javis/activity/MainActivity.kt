@@ -30,7 +30,7 @@ class MainActivity: BaseActivity() {
     
     private var isMenuOpen = false
     private var isRecording = false
-    private var recorder: VoiceRecorder? = null
+    private var recorder = VoiceRecorder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
