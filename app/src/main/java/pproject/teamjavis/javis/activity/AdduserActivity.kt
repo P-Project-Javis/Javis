@@ -17,7 +17,7 @@ class AdduserActivity: BaseActivity() {
     private var isVoiceChecked = false
     private var isRecording = false
 
-    private var name: String? = null
+    private var name: String = "이름미지정"
     private var recorder: VoiceRecorder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +35,12 @@ class AdduserActivity: BaseActivity() {
             adduser_nameWrap.visibility = View.GONE
             adduser_voiceWrap.visibility = View.VISIBLE
             isNameChecked = true
-            adduser_nameChecker.setImageDrawable(resources.getDrawable(R.drawable.ic_check_box_black_24dp))
+            adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
         }
 
         adduser_recordButton.setOnClickListener {
             if(!isRecording)
-                startRecording()
+                startRecording(name)
             else
                 stopRecording()
         }
@@ -52,18 +52,18 @@ class AdduserActivity: BaseActivity() {
         }
     }
 
-    private fun startRecording() {
-        recorder = VoiceRecorder(applicationContext, name)
-        recorder!!.startRecord()
-        adduser_recordButton.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_48dp))
+    private fun startRecording(name: String) {
+        recorder!!.setupRecorder(name)
+        recorder!!.startRecorder()
+        adduser_recordButton.setImageResource(R.drawable.ic_mic_black_48dp)
         isRecording = true
     }
 
     private fun stopRecording() {
-        recorder!!.stopRecord()
-        adduser_recordButton.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_48dp))
+        recorder!!.stopRecorder()
+        adduser_recordButton.setImageResource(R.drawable.ic_mic_none_black_48dp)
         isVoiceChecked = true
-        adduser_voiceChecker.setImageDrawable(resources.getDrawable(R.drawable.ic_check_box_black_24dp))
+        adduser_voiceChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
         isRecording = false
     }
 }

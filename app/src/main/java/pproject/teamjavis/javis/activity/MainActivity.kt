@@ -36,7 +36,7 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
 
-        recorder = VoiceRecorder(applicationContext, "order")
+        recorder = VoiceRecorder()
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
@@ -112,15 +112,16 @@ class MainActivity: BaseActivity() {
     }
 
     private fun startRecording() {
-        recorder!!.startRecord()
-        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_48dp))
+        recorder!!.setupRecorder("order")
+        recorder!!.startRecorder()
+        main_mic.setImageResource(R.drawable.ic_mic_black_48dp)
         main_message.text = resources.getText(R.string.message_recording)
         isRecording = true
     }
 
     private fun stopRecording() {
-        recorder!!.stopRecord()
-        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_48dp))
+        recorder!!.stopRecorder()
+        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
     }

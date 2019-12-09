@@ -5,9 +5,11 @@
  */
 package pproject.teamjavis.javis.util;
 
-import android.content.Context;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
+import android.os.Environment;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,28 +22,22 @@ import omrecorder.PullableSource;
 import omrecorder.Recorder;
 
 public class VoiceRecorder {
-    private Recorder recorder;
-    private File file;
+    Recorder recorder;
 
-    public VoiceRecorder(Context context, String fileName) {
-        recorder = null;
-        file = new File(context.getFilesDir(), fileName + ".wav");
-
+    public void setupRecorder(String fileName) {
         recorder = OmRecorder.wav(
                 new PullTransport.Default(mic(), new PullTransport.OnAudioChunkPulledListener() {
                     @Override
-                    public void onAudioChunkPulled(AudioChunk audioChunk) {
-                        animateVoice((float)(audioChunk.maxAmplitude() / 200.0f));
-                    }
-                }), file
+                    public void onAudioChunkPulled(AudioChunk audioChunk) { }
+                }), file(fileName)
         );
     }
 
-    public void startRecord() {
+    public void startRecorder() {
         recorder.startRecording();
     }
 
-    public void stopRecord() {
+    public void stopRecorder() {
         try {
             recorder.stopRecording();
         } catch (IOException e) {
@@ -52,10 +48,14 @@ public class VoiceRecorder {
     private PullableSource mic() {
         return new PullableSource.Default(
                 new AudioRecordConfig.Default(
-                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 44100
-                )
-        );
+                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 44100)
+                );
     }
 
-    private void animateVoice(final float maxPeach) { return; }
+    @NonNull private File file(String fileName) {
+        File filePath = new File(Environment.getExternalStorageDirectory(), "/Javis");
+        if(!filePath.exists())
+            filePath.mkdir();
+        return new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
+    }
 }
