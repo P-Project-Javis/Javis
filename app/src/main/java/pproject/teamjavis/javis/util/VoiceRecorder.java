@@ -5,46 +5,57 @@
  */
 package pproject.teamjavis.javis.util;
 
-import android.content.Context;
+import android.media.AudioFormat;
 import android.media.MediaRecorder;
+import android.os.Environment;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
 
+import omrecorder.AudioChunk;
+import omrecorder.AudioRecordConfig;
+import omrecorder.OmRecorder;
+import omrecorder.PullTransport;
+import omrecorder.PullableSource;
+import omrecorder.Recorder;
+
 public class VoiceRecorder {
-    private MediaRecorder recorder;
-    private String filePath;
+    Recorder recorder;
 
-    public VoiceRecorder(Context context, String fileName) {
-        recorder = null;
-
-        File file = new File(context.getFilesDir(), fileName + ".mp4");
-        filePath = file.getAbsolutePath();
+    public void setupRecorder(String fileName) {
+        recorder = OmRecorder.wav(
+                new PullTransport.Default(mic(), new PullTransport.OnAudioChunkPulledListener() {
+                    @Override
+                    public void onAudioChunkPulled(AudioChunk audioChunk) { }
+                }), file(fileName)
+        );
     }
 
-    public void startRecord() {
-        recorder = new MediaRecorder();
+    public void startRecorder() {
+        recorder.startRecording();
+    }
 
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-
-        recorder.setOutputFile(filePath);
-
+    public void stopRecorder() {
         try {
-            recorder.prepare();
-            recorder.start();
-        }
-        catch (IOException e) {
+            recorder.stopRecording();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void stopRecord() {
-        if(recorder != null) {
-            recorder.stop();
-            recorder.release();
-            recorder = null;
-        }
+    private PullableSource mic() {
+        return new PullableSource.Default(
+                new AudioRecordConfig.Default(
+                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 44100)
+                );
+    }
+
+    @NonNull private File file(String fileName) {
+        File filePath = new File(Environment.getExternalStorageDirectory(), "/Javis");
+        if(!filePath.exists())
+            filePath.mkdir();
+        return new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
     }
 }

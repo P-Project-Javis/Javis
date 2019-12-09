@@ -25,7 +25,7 @@ import pproject.teamjavis.javis.util.VoiceRecorder
 
 class MainActivity: BaseActivity() {
     companion object {
-        const val PERMISSION_REQUEST_RECORD_AUDIO = 1
+        const val PERMISSION = 1
     }
     
     private var isMenuOpen = false
@@ -36,7 +36,7 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
 
-        recorder = VoiceRecorder(applicationContext, "order")
+        recorder = VoiceRecorder()
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
@@ -49,19 +49,22 @@ class MainActivity: BaseActivity() {
         }
 
         main_settingButton.setOnClickListener {
-            stopRecording()
+            if(isRecording)
+                stopRecording()
             val intent = Intent(applicationContext, SettingActivity::class.java)
             startActivity(intent)
         }
 
         main_adduserButton.setOnClickListener {
-            stopRecording()
+            if(isRecording)
+                stopRecording()
             val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
 
         main_lockButton.setOnClickListener {
-            stopRecording()
+            if(isRecording)
+                stopRecording()
             val intent = Intent(applicationContext, AuthorityActivity::class.java)
             startActivity(intent)
         }
@@ -75,14 +78,14 @@ class MainActivity: BaseActivity() {
 
         if(checkPermission() == PackageManager.PERMISSION_DENIED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), PERMISSION_REQUEST_RECORD_AUDIO)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), PERMISSION)
             }
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
-            PERMISSION_REQUEST_RECORD_AUDIO -> {
+            PERMISSION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     makeToast("승인했습니다.")
                 } else {
@@ -109,15 +112,16 @@ class MainActivity: BaseActivity() {
     }
 
     private fun startRecording() {
-        recorder!!.startRecord()
-        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_black_48dp))
+        recorder!!.setupRecorder("order")
+        recorder!!.startRecorder()
+        main_mic.setImageResource(R.drawable.ic_mic_black_48dp)
         main_message.text = resources.getText(R.string.message_recording)
         isRecording = true
     }
 
     private fun stopRecording() {
-        recorder!!.stopRecord()
-        main_mic.setImageDrawable(resources.getDrawable(R.drawable.ic_mic_none_black_48dp))
+        recorder!!.stopRecorder()
+        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
     }
