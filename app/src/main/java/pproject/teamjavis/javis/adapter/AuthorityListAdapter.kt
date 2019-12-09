@@ -25,7 +25,7 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
 
         if(view == null) {
             val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.layout_authority_parent, parent, false)
+            view = inflater.inflate(R.layout.layout_authority_list_parent, parent, false)
         }
 
         val name = view!!.findViewById<TextView>(R.id.authority_parent_name)
@@ -43,7 +43,7 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
 
         if(view == null) {
             val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.layout_authority_child, parent, false)
+            view = inflater.inflate(R.layout.layout_authority_list_child, parent, false)
         }
 
         val icon = view!!.findViewById<ImageView>(R.id.authority_child_icon)

@@ -10,21 +10,33 @@
  */
 package pproject.teamjavis.javis.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.animation.AccelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.VoiceRecorder
 
 class MainActivity: BaseActivity() {
+    companion object {
+        const val PERMISSION = 1
+    }
+    
     private var isMenuOpen = false
+    private var isRecording = false
+    private var recorder: VoiceRecorder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
+
+        recorder = VoiceRecorder()
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
@@ -37,18 +49,55 @@ class MainActivity: BaseActivity() {
         }
 
         main_settingButton.setOnClickListener {
+            if(isRecording)
+                stopRecording()
             val intent = Intent(applicationContext, SettingActivity::class.java)
             startActivity(intent)
         }
 
         main_adduserButton.setOnClickListener {
+            if(isRecording)
+                stopRecording()
             val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
 
         main_lockButton.setOnClickListener {
+            if(isRecording)
+                stopRecording()
             val intent = Intent(applicationContext, AuthorityActivity::class.java)
             startActivity(intent)
+        }
+
+        main_mic.setOnClickListener {
+            if(!isRecording)
+                startRecording()
+            else
+                stopRecording()
+        }
+
+        if(checkPermission() == PackageManager.PERMISSION_DENIED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), PERMISSION)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            PERMISSION -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    makeToast("승인했습니다.")
+                } else {
+                    makeToast("거부하셨습니다. 앱을 정상적으로 이용할 수 없습니다.")
+                    finish()
+                }
+                return
+            }
+            else -> {
+                makeToast("거부하셨습니다. 앱을 정상적으로 이용할 수 없습니다.")
+                finish()
+            }
         }
     }
 
@@ -60,5 +109,20 @@ class MainActivity: BaseActivity() {
         var trans = ChangeBounds()
         trans.interpolator = AccelerateInterpolator()
         TransitionManager.beginDelayedTransition(root, trans)
+    }
+
+    private fun startRecording() {
+        recorder!!.setupRecorder("order")
+        recorder!!.startRecorder()
+        main_mic.setImageResource(R.drawable.ic_mic_black_48dp)
+        main_message.text = resources.getText(R.string.message_recording)
+        isRecording = true
+    }
+
+    private fun stopRecording() {
+        recorder!!.stopRecorder()
+        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+        main_message.text = resources.getText(R.string.message_notrecording)
+        isRecording = false
     }
 }

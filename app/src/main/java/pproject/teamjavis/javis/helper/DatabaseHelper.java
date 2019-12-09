@@ -1,10 +1,7 @@
 package pproject.teamjavis.javis.helper;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import pproject.teamjavis.javis.R;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
@@ -29,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public void update(String name, int voice, int tv, int light, int gas, int buy){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE USERINFO SET voice = " + voice + ", tv = " + tv + ", light = " + light + ", gas = " + gas + ", buy = "+ buy + "WHERE name = '" + name + "');");
+        db.execSQL("UPDATE USERINFO SET voice = " + voice + ", tv = " + tv + ", light = " + light + ", gas = " + gas + ", buy = "+ buy + "WHERE name = '" + name + ";");
         db.close();
     }
 
