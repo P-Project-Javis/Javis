@@ -3,36 +3,51 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper{
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
-        super(context, name, factory, version);
+public class DatabaseHelper extends SQLiteOpenHelper {
+    private String dbName;
+    private SQLiteDatabase db;
+
+    public DatabaseHelper(Context context) {
+        super(context, "javis", null, 1);
+        dbName = "javis";
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE USERINFO (name TEXT NOT NULL, voice INTEGER, tv INTEGER, light INTEGER, gas INTEGER, buy INTEGER);");
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + dbName + " (name TEXT NOT NULL, voice TEXT, tv INTEGER, light INTEGER, gas INTEGER, buy INTEGER);");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + dbName);
+        onCreate(db);
+    }
+
+    public void openWritable() {
+        db = getWritableDatabase();
+    }
+
+    public void openReadable() {
+        db = getReadableDatabase();
+    }
+
+    public void insert(String name, String voice, int tv, int light, int gas, int buy) {
+        db.execSQL("INSERT INTO " + dbName + " VALUES(" + "'" + name +"', '" + voice + "', '" + tv + "', '" + light + "', '" + gas + "', '" + buy +"');");
+    }
+
+    public void update(String name, String voice, int tv, int light, int gas, int buy) {
+        db.execSQL("UPDATE " + dbName + " SET voice = " + voice + ", tv = " + tv + ", light = " + light + ", gas = " + gas + ", buy = "+ buy + "WHERE name = '" + name + ";");
+    }
+
+    public void select() {
 
     }
 
-    public void insert(String name, int voice, int tv, int light, int gas, int buy){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO USERINFO VALUES(" + "'" + name +"', " + voice + ", '" + tv + ", '" + light + ", '" + gas + ", '" + buy +"');");
-        db.close();
+    public void selectAll() {
+
     }
 
-    public void update(String name, int voice, int tv, int light, int gas, int buy){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE USERINFO SET voice = " + voice + ", tv = " + tv + ", light = " + light + ", gas = " + gas + ", buy = "+ buy + "WHERE name = '" + name + ";");
-        db.close();
-    }
-
-    public void delete(String name){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM USERINFO WHERE name='" + name + "';");
-        db.close();
+    public void delete(String name) {
+        db.execSQL("DELETE FROM " + dbName + " WHERE name='" + name + "';");
     }
 }

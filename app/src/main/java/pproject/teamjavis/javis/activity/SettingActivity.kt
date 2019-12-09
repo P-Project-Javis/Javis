@@ -10,6 +10,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.DatabaseHelper
 
 class SettingActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

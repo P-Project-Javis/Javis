@@ -10,6 +10,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.DatabaseHelper
 import pproject.teamjavis.javis.util.VoiceRecorder
 
 class AdduserActivity: BaseActivity() {
@@ -18,7 +19,7 @@ class AdduserActivity: BaseActivity() {
     private var isRecording = false
 
     private var name: String = "이름미지정"
-    private var recorder: VoiceRecorder? = null
+    private var recorder = VoiceRecorder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,22 +32,30 @@ class AdduserActivity: BaseActivity() {
 
         adduser_nextButton.setOnClickListener {
             name = adduser_inputName.text.toString()
-
-            adduser_nameWrap.visibility = View.GONE
-            adduser_voiceWrap.visibility = View.VISIBLE
-            isNameChecked = true
-            adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
+            if(name != "") {
+                adduser_nameWrap.visibility = View.GONE
+                adduser_voiceWrap.visibility = View.VISIBLE
+                isNameChecked = true
+                adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
+            }
+            else
+                makeToast("한 글자 이상 입력하세요")
         }
 
         adduser_recordButton.setOnClickListener {
             if(!isRecording)
                 startRecording(name)
-            else
+            else {
                 stopRecording()
+                adduser_confirmButton.visibility = View.VISIBLE
+            }
+
         }
 
+        adduser_confirmButton.visibility = View.GONE
         adduser_confirmButton.setOnClickListener {
             if(isNameChecked && isVoiceChecked) {
+                addUser()
                 finish()
             }
         }
@@ -65,5 +74,14 @@ class AdduserActivity: BaseActivity() {
         isVoiceChecked = true
         adduser_voiceChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
         isRecording = false
+    }
+
+    private fun addUser() {
+        val db = DatabaseHelper(applicationContext)
+        val fileName = recorder!!.fileName
+
+        db.openWritable()
+        db.insert(name, fileName, 1, 1, 0, 0)
+        db.close()
     }
 }
