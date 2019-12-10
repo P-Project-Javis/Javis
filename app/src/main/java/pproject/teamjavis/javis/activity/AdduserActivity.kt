@@ -32,11 +32,20 @@ class AdduserActivity: BaseActivity() {
 
         adduser_nextButton.setOnClickListener {
             name = adduser_inputName.text.toString()
+            //이름 공백 여부 확인
             if(name != "") {
-                adduser_nameWrap.visibility = View.GONE
-                adduser_voiceWrap.visibility = View.VISIBLE
-                isNameChecked = true
-                adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
+                val db = DatabaseHelper(applicationContext)
+                db.openReadable()
+                //이름 중복 여부 확인
+                if(db.checkName(name)) {
+                    adduser_nameWrap.visibility = View.GONE
+                    adduser_voiceWrap.visibility = View.VISIBLE
+                    isNameChecked = true
+                    adduser_nameChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
+                }
+                else
+                    makeToast("이미 존재하는 사용자 이름입니다")
+                db.close()
             }
             else
                 makeToast("한 글자 이상 입력하세요")

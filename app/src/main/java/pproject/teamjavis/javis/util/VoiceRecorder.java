@@ -61,7 +61,7 @@ public class VoiceRecorder {
         File filePath = new File(Environment.getExternalStorageDirectory(), "/Javis");
         if(!filePath.exists())
             filePath.mkdir();
-        this.fileName = fileName + ".wav";
+        this.fileName = fileName;
         return new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
     }
 }

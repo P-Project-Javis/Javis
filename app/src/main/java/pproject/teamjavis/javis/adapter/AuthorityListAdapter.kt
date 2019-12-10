@@ -9,12 +9,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
-import android.widget.ImageView
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.item.AuthorityParentItem
+import pproject.teamjavis.javis.util.DatabaseHelper
 
 class AuthorityListAdapter: BaseExpandableListAdapter() {
     private var items = ArrayList<AuthorityParentItem>()
@@ -55,6 +53,19 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
         icon.setImageDrawable(item.icon)
         title.text = item.title
         switch.isChecked = item.isChecked
+
+        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            val db = DatabaseHelper(context)
+            db.openReadable()
+            val newItem = db.select(groupPosition)
+            db.close()
+
+            newItem.authorityList[childPosition].isChecked = isChecked
+
+            db.openWritable()
+            db.update(newItem)
+            db.close()
+        }
 
         return view
     }
