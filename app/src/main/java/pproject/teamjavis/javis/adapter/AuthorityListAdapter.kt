@@ -56,14 +56,16 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
 
         switch.setOnClickListener {
             val db = DatabaseHelper(context)
+
+            val valChecked = switch.isChecked
+
             db.openReadable()
-            val newItem = db.select(groupPosition)
+            val parentItem = db.select(groupPosition)
             db.close()
 
-            newItem.authorityList[childPosition].isChecked = isChecked
-
             db.openWritable()
-            db.update(newItem)
+            parentItem.authorityList[childPosition].isChecked = valChecked
+            db.update(parentItem)
             db.close()
         }
 
