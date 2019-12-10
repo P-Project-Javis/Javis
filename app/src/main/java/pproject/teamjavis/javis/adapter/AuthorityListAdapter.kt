@@ -15,7 +15,7 @@ import pproject.teamjavis.javis.item.AuthorityParentItem
 import pproject.teamjavis.javis.util.DatabaseHelper
 
 class AuthorityListAdapter: BaseExpandableListAdapter() {
-    private var items = ArrayList<AuthorityParentItem>()
+    var items = ArrayList<AuthorityParentItem>()
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
@@ -54,16 +54,18 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
         title.text = item.title
         switch.isChecked = item.isChecked
 
-        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+        switch.setOnClickListener {
             val db = DatabaseHelper(context)
+
+            val valChecked = switch.isChecked
+
             db.openReadable()
-            val newItem = db.select(groupPosition)
+            val parentItem = db.select(groupPosition)
             db.close()
 
-            newItem.authorityList[childPosition].isChecked = isChecked
-
             db.openWritable()
-            db.update(newItem)
+            parentItem.authorityList[childPosition].isChecked = valChecked
+            db.update(parentItem)
             db.close()
         }
 
