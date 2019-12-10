@@ -44,6 +44,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + dbName + " VALUES(" + "'" + name +"', '" + voice + "', '" + tv + "', '" + light + "', '" + gas + "', '" + buy +"');");
     }
 
+    public void update(String name, String voice, boolean tv, boolean light, boolean gas, boolean buy) {
+        int valTv = boolean2Int(tv);
+        int valLight = boolean2Int(light);
+        int valGas = boolean2Int(gas);
+        int valBuy = boolean2Int(buy);
+
+        db.execSQL("UPDATE " + dbName + " SET name = '" + name + "', voice = '" + voice + "', tv = '" + valTv + "', light = '" + valLight + "', gas = '" + valGas + "', buy = '"+ valBuy + "' WHERE name = '" + name + "';");
+    }
+
+    public void update(String name, String voice, int tv, int light, int gas, int buy) {
+        db.execSQL("UPDATE " + dbName + " SET name = '" + name + "', voice = '" + voice + "', tv = '" + tv + "', light = '" + light + "', gas = '" + gas + "', buy = '"+ buy + "' WHERE name = '" + name + "';");
+    }
+
     public void update(AuthorityParentItem item) {
         String name = item.getName();
         String voice = item.getVoicePath();
@@ -96,44 +109,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public AuthorityParentItem select(int position) {
-        AuthorityParentItem item;
+        AuthorityParentItem item = selectAll().get(position);
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + dbName + ";", null);
-        if(cursor.getCount() > 0) {
-            for(int index = 0; index <= position; index++)
-                cursor.moveToNext();
-
-            String valName = cursor.getString(0);
-            String voice = cursor.getString(1);
-
-            AuthorityChildItem tv = new AuthorityChildItem(
-                    context.getDrawable(R.drawable.ic_tv_black_24dp),
-                    "TV",
-                    int2Boolean(cursor.getInt(2)));
-            AuthorityChildItem light = new AuthorityChildItem(
-                    context.getDrawable(R.drawable.ic_lightbulb_outline_black_24dp),
-                    "조명",
-                    int2Boolean(cursor.getInt(3)));
-            AuthorityChildItem gas = new AuthorityChildItem(
-                    context.getDrawable(R.drawable.ic_burner_black_24dp),
-                    "가스레인지",
-                    int2Boolean(cursor.getInt(4)));
-            AuthorityChildItem buy = new AuthorityChildItem(
-                    context.getDrawable(R.drawable.ic_shopping_cart_black_24dp),
-                    "인터넷 쇼핑",
-                    int2Boolean(cursor.getInt(5)));
-
-            ArrayList<AuthorityChildItem> child = new ArrayList<>();
-            child.add(tv);
-            child.add(light);
-            child.add(gas);
-            child.add(buy);
-
-            item = new AuthorityParentItem(valName, voice, child);
+        if(item == null)
+            return null;
+        else
             return item;
-        }
-
-        return null;
     }
 
     public ArrayList<AuthorityParentItem> selectAll() {
@@ -172,6 +153,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 items.add(parent);
             }
         }
+        else
+            return null;
+
         cursor.close();
 
         return items;
