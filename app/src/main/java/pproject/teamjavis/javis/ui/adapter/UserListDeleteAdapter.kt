@@ -1,6 +1,7 @@
 package pproject.teamjavis.javis.ui.adapter
 
 import android.content.Context
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.TextView
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
 import pproject.teamjavis.javis.util.DatabaseHelper
+import java.io.File
 
 class UserListDeleteAdapter: BaseAdapter() {
     private val items = ArrayList<AuthorityParentItem>()
@@ -34,6 +36,9 @@ class UserListDeleteAdapter: BaseAdapter() {
             db.openWritable()
             db.delete(item.name)
             db.close()
+            val file = File(Environment.getExternalStorageDirectory(), "/Javis/${item.name}.wav")
+            if(file.exists())
+                file.delete()
             items.removeAt(position)
             notifyDataSetChanged()
         }
