@@ -8,7 +8,7 @@
 3. log() 메소드를 통한 간편한 로깅 가능.
 4. makeToast() 메소드를 통한 간편한 토스트 생성.
  */
-package pproject.teamjavis.javis.activity
+package pproject.teamjavis.javis.ui.activity
 
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager

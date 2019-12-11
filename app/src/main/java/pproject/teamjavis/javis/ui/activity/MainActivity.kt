@@ -8,7 +8,7 @@
 3 .마이크 이미지 클릭시 녹음 활성화.
 4. 메뉴의 각 아이템 클릭시 각 액티비티로 이동.
  */
-package pproject.teamjavis.javis.activity
+package pproject.teamjavis.javis.ui.activity
 
 import android.Manifest
 import android.content.Intent
@@ -78,7 +78,9 @@ class MainActivity: BaseActivity() {
 
         if(checkPermission() == PackageManager.PERMISSION_DENIED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), PERMISSION)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO),
+                    PERMISSION
+                )
             }
         }
     }

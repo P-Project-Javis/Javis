@@ -3,7 +3,7 @@
 
 앱의 전반적인 설정 액티비티. 앱의 정보와 간단한 설정 가능.
  */
-package pproject.teamjavis.javis.activity
+package pproject.teamjavis.javis.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

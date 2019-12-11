@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 import pproject.teamjavis.javis.R;
-import pproject.teamjavis.javis.item.AuthorityChildItem;
-import pproject.teamjavis.javis.item.AuthorityParentItem;
+import pproject.teamjavis.javis.ui.item.AuthorityChildItem;
+import pproject.teamjavis.javis.ui.item.AuthorityParentItem;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private Context context;
