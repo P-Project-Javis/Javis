@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.SettingActivity">
@@ -52,11 +53,6 @@
                 <Button
                     android:id="@+id/setting_removeUser"
                     android:text="사용자 삭제"
-                    style="@style/SettingButtonStyle"/>
-
-                <Button
-                    android:id="@+id/setting_clearUser"
-                    android:text="사용자 목록 초기화"
                     style="@style/SettingButtonStyle"/>
 
                 <include layout="@layout/layout_horizontal_line"/>
