@@ -3,7 +3,7 @@
 
 ExpandableListView의 레이아웃과 내용 등을 정의.
  */
-package pproject.teamjavis.javis.adapter
+package pproject.teamjavis.javis.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import pproject.teamjavis.javis.R
-import pproject.teamjavis.javis.item.AuthorityParentItem
+import pproject.teamjavis.javis.ui.item.AuthorityParentItem
 import pproject.teamjavis.javis.util.DatabaseHelper
 
 class AuthorityListAdapter: BaseExpandableListAdapter() {

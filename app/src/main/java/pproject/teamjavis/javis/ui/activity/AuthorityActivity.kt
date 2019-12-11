@@ -3,15 +3,13 @@
 
 등록된 사용자의 권한 설정을 담당하는 클래스. 권한이 없는 행동은 명령 불가.
  */
-package pproject.teamjavis.javis.activity
+package pproject.teamjavis.javis.ui.activity
 
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_authority.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
-import pproject.teamjavis.javis.adapter.AuthorityListAdapter
-import pproject.teamjavis.javis.item.AuthorityChildItem
-import pproject.teamjavis.javis.item.AuthorityParentItem
+import pproject.teamjavis.javis.ui.adapter.AuthorityListAdapter
 import pproject.teamjavis.javis.util.DatabaseHelper
 
 class AuthorityActivity: BaseActivity() {
@@ -27,7 +25,9 @@ class AuthorityActivity: BaseActivity() {
 
         val db = DatabaseHelper(applicationContext)
         db.openReadable()
-        adapter.add(db.selectAll())
+        val data = db.selectAll()
+        if(data != null)
+            adapter.add(db.selectAll())
         db.close()
     }
 }

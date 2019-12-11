@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AdduserActivity">
+    tools:context=".ui.activity.AdduserActivity">
 
     <include android:id="@+id/adduser_topbar"
         layout="@layout/layout_topbar"/>
