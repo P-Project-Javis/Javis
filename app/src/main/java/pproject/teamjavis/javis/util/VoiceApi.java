@@ -1,5 +1,11 @@
 package pproject.teamjavis.javis.util;
 
+import org.json.JSONObject;
+
+import java.util.Map;
+
+import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -21,15 +27,15 @@ public interface VoiceApi {
     @Multipart
     @Headers({"content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW","cache-control: no-cache","Content-Type: multipart/form-data"})
     @POST("app/getVoice")
-    void getVoice();
+    Call<JSONObject> getVoice(@PartMap Map<String, RequestBody> map);
 
     @Multipart
     @Headers({"content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW","cache-control: no-cache","Content-Type: multipart/form-data"})
     @DELETE("app/deleteVoice")
-    void DeleteVoice();
+    Call<JSONObject> deleteVoice(@PartMap Map<String, RequestBody> map);
 
     @Multipart
     @Headers({"content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW","cache-control: no-cache","Content-Type: multipart/form-data"})
     @POST("app/recogVoice")
-    void RecogVoice();
+    Call<JSONObject> recogVoice(@PartMap Map<String, RequestBody> map);
 }
