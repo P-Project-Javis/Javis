@@ -8,12 +8,14 @@ import android.widget.PopupWindow
 import kotlinx.android.synthetic.main.layout_topbar.view.*
 import kotlinx.android.synthetic.main.layout_user_list.view.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.ui.adapter.UserListDeleteAdapter
+import pproject.teamjavis.javis.ui.adapter.UserListLookupAdapter
+import pproject.teamjavis.javis.util.DatabaseHelper
 
 class UserListPopup(context: Context) {
     companion object {
         const val MODE_LOOKUP = 0
         const val MODE_DELETE = 1
-        const val MODE_EDIT = 2
 
         const val RETURN_WIDTH = 10
         const val RETURN_HEIGHT = 11
@@ -32,13 +34,30 @@ class UserListPopup(context: Context) {
     fun setMode(mode: Int) {
         when(mode) {
             MODE_LOOKUP -> {
+                val adapter = UserListLookupAdapter()
+                popupView.user_list_listView.adapter = adapter
 
+                val db = DatabaseHelper(context)
+                db.openReadable()
+                val items = db.selectAll()
+                if(items != null) {
+                    for(item in items)
+                        adapter.add(item)
+                }
+                db.close()
             }
             MODE_DELETE -> {
+                val adapter = UserListDeleteAdapter()
+                popupView.user_list_listView.adapter = adapter
 
-            }
-            MODE_EDIT -> {
-
+                val db = DatabaseHelper(context)
+                db.openReadable()
+                val items = db.selectAll()
+                if(items != null) {
+                    for(item in items)
+                        adapter.add(item)
+                }
+                db.close()
             }
         }
     }
@@ -53,7 +72,7 @@ class UserListPopup(context: Context) {
         display.getSize(point)
 
         val width = (point.x * 0.8).toInt()
-        val height = (point.y * 0.8).toInt()
+        val height = (point.y * 0.6).toInt()
 
         return when (mode) {
             RETURN_WIDTH -> {

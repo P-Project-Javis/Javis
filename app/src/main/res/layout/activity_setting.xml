@@ -46,11 +46,6 @@
                     style="@style/SettingButtonStyle"/>
 
                 <Button
-                    android:id="@+id/setting_editUser"
-                    android:text="사용자 수정"
-                    style="@style/SettingButtonStyle"/>
-
-                <Button
                     android:id="@+id/setting_removeUser"
                     android:text="사용자 삭제"
                     style="@style/SettingButtonStyle"/>

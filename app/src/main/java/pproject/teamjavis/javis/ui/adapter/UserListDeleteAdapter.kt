@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageButton
 import android.widget.TextView
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
+import pproject.teamjavis.javis.util.DatabaseHelper
 
-class UserListLookupAdapter: BaseAdapter() {
+class UserListDeleteAdapter: BaseAdapter() {
     private val items = ArrayList<AuthorityParentItem>()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -18,14 +20,23 @@ class UserListLookupAdapter: BaseAdapter() {
 
         if(view == null) {
             val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.layout_user_list_lookup, parent, false)
+            view = inflater.inflate(R.layout.layout_user_list_delete, parent, false)
         }
 
         val name = view!!.findViewById<TextView>(R.id.user_list_lookup_name)
+        val button = view.findViewById<ImageButton>(R.id.user_list_delete_button)
 
         val item = items[position]
 
         name.text = item.name
+        button.setOnClickListener {
+            val db = DatabaseHelper(context)
+            db.openWritable()
+            db.delete(item.name)
+            db.close()
+            items.removeAt(position)
+            notifyDataSetChanged()
+        }
 
         return view
     }

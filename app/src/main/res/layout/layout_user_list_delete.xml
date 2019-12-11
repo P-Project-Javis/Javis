@@ -2,13 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/user_list_delete_name"
+        android:id="@+id/user_list_lookup_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        style="@style/SettingTitleStyle" />
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/colorAccentDark"/>
 
     <ImageButton
         android:id="@+id/user_list_delete_button"

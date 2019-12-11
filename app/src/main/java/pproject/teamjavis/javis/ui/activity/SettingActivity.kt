@@ -29,11 +29,6 @@ class SettingActivity: BaseActivity() {
             val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
-        setting_editUser.setOnClickListener {
-            val popup = UserListPopup(applicationContext)
-            popup.setMode(UserListPopup.MODE_EDIT)
-            popup.pop(setting_parent)
-        }
         setting_removeUser.setOnClickListener {
             val popup = UserListPopup(applicationContext)
             popup.setMode(UserListPopup.MODE_DELETE)
