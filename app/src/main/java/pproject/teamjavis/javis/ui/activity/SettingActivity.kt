@@ -37,7 +37,6 @@ class SettingActivity: BaseActivity() {
 
         setting_appVersion.text = "Javis 버전: " + applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
         setting_developer.setOnClickListener { makeToast("개발자") }
-        setting_license.setOnClickListener { makeToast("라이선스") }
         setting_openSource.setOnClickListener { makeToast("오픈소스 라이브러리") }
     }
 }
