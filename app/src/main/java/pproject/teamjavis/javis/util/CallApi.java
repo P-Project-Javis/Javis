@@ -45,6 +45,7 @@ public class CallApi {
         call.enqueue(new Callback<JSONObject>() {
             @Override
             public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                //TODO callSetVoiceAPI 채우기
             }
 
             @Override
@@ -53,4 +54,99 @@ public class CallApi {
             }
         });
     }
+
+    public void callGetVoiceAPI() {
+        File file = new File(Environment.getExternalStorageDirectory(), "/Javis");
+
+        RequestBody fileBody = RequestBody.create(MediaType.parse("audio/*"), file);
+        RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), API_ID);
+        RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), API_KEY);
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), DB_ID);
+        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), VOICE_ID);
+
+        Map<String, RequestBody> reqMap = new HashMap<String, RequestBody>();
+
+        reqMap.put("file", fileBody);
+        reqMap.put("apiId", apiId);
+        reqMap.put("dbId", dbId);
+        reqMap.put("apiKey", apiKey);
+        reqMap.put("voiceId", voiceId);
+
+        Call<JSONObject> call = voiceApi.getVoice(reqMap);
+        call.enqueue(new Callback<JSONObject>() {
+            @Override
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                //TODO callGetVoiceAPI 채우기
+            }
+
+            @Override
+            public void onFailure(Call<JSONObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void callDeleteVoiceAPI() {
+        File file = new File(Environment.getExternalStorageDirectory(), "/Javis");
+
+        RequestBody fileBody = RequestBody.create(MediaType.parse("audio/*"), file);
+        RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), API_ID);
+        RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), API_KEY);
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), DB_ID);
+        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), VOICE_ID);
+
+        Map<String, RequestBody> reqMap = new HashMap<String, RequestBody>();
+
+        reqMap.put("file", fileBody);
+        reqMap.put("apiId", apiId);
+        reqMap.put("dbId", dbId);
+        reqMap.put("apiKey", apiKey);
+        reqMap.put("voiceId", voiceId);
+
+        Call<JSONObject> call = voiceApi.deleteVoice(reqMap);
+        call.enqueue(new Callback<JSONObject>() {
+            @Override
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                //TODO callDeleteVoiceAPI 채우기
+            }
+
+            @Override
+            public void onFailure(Call<JSONObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void callRecogVoiceAPI() {
+        File file = new File(Environment.getExternalStorageDirectory(), "/Javis");
+
+        RequestBody fileBody = RequestBody.create(MediaType.parse("audio/*"), file);
+        RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), API_ID);
+        RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), API_KEY);
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), DB_ID);
+        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), VOICE_ID);
+
+        Map<String, RequestBody> reqMap = new HashMap<String, RequestBody>();
+
+        reqMap.put("file", fileBody);
+        reqMap.put("apiId", apiId);
+        reqMap.put("dbId", dbId);
+        reqMap.put("apiKey", apiKey);
+        reqMap.put("voiceId", voiceId);
+
+        Call<JSONObject> call = voiceApi.recogVoice(reqMap);
+        call.enqueue(new Callback<JSONObject>() {
+            @Override
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                //TODO callRecogVoiceAPI 채우기
+            }
+
+            @Override
+            public void onFailure(Call<JSONObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 }
