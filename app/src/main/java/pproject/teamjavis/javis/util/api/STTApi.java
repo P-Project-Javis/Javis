@@ -18,10 +18,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class STTApi {
-    Context context;
-    File file;
-    RequestBody requestFile;
-    MultipartBody.Part uploadFile;
+    private Context context;
+    private File file;
+    private RequestBody requestFile;
+    private MultipartBody.Part uploadFile;
+
+    private String result;
 
     public STTApi(Context context, String fileName) {
         this.context = context;
@@ -30,9 +32,7 @@ public class STTApi {
         uploadFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
     }
 
-    public String connect() {
-        String result;
-
+    public void connect() {
         RequestBody id = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody key = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
         RequestBody lang = RequestBody.create(MediaType.parse("text/plain"), "kor");
@@ -47,23 +47,27 @@ public class STTApi {
             public void onResponse(Call<STTItem> call, Response<STTItem> response) {
                 Gson gson = new Gson();
                 if(response.isSuccessful()) {
-                    //result = response.body().toString();
-                    Toast.makeText(context, "성공 " + response.body().toString(), Toast.LENGTH_LONG).show();
-
+                    result = parser(response.body().toString());
                 }
                 else {
-                    //result[0] = "서버와 연결되었지만 오류가 발생했습니다.";
-                    Toast.makeText(context, "실패", Toast.LENGTH_LONG).show();
+                    result = "서버와 연결되었지만 오류가 발생했습니다.";
                 }
             }
 
             @Override
             public void onFailure(Call<STTItem> call, Throwable t) {
-                //result[0] = "서버와의 연결에 실패했습니다.";
-                Toast.makeText(context, "실패", Toast.LENGTH_LONG).show();
+                result = "서버와의 연결에 실패했습니다.";
             }
         });
+    }
 
-        return "";
+    public String getResult() {
+        return result;
+    }
+
+    private String parser(String data) {
+        String[] parsed1 = data.split(",");
+        String parsed2 = parsed1[2].substring(6, parsed1[2].length() - 1);
+        return parsed2;
     }
 }

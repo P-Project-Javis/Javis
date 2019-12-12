@@ -14,6 +14,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.animation.AccelerateInterpolator
@@ -129,7 +130,9 @@ class MainActivity: BaseActivity() {
         isRecording = false
 
         val api = STTApi(applicationContext, "order")
-        val response = api.connect()
-        main_message.text = response
+        api.connect()
+        Handler().postDelayed(Runnable {
+            main_message.text = api.result
+        }, 1000)
     }
 }
