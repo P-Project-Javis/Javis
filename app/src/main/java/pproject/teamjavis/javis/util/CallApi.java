@@ -23,36 +23,40 @@ public class CallApi {
 
     VoiceApi voiceApi;
 
-
-    public void callSetVoiceApi(){
-        File file = new File(Environment.getExternalStorageDirectory(), "/Javis");
-
-        RequestBody fileBody = RequestBody.create(MediaType.parse("audio/*"), file);
-        RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), API_ID);
-        RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), API_KEY);
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), DB_ID);
-        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), VOICE_ID);
-
-        Map<String, RequestBody> reqMap = new HashMap<String, RequestBody>();
-
-        reqMap.put("file", fileBody);
-        reqMap.put("apiId", apiId);
-        reqMap.put("dbId", dbId);
-        reqMap.put("apiKey", apiKey);
-        reqMap.put("voiceId", voiceId);
-
-        Call<JSONObject> call = voiceApi.setVoice(reqMap);
-        call.enqueue(new Callback<JSONObject>() {
+    public void callSetVoiceApi(final String name){
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                //TODO callSetVoiceAPI 채우기
-            }
+            public void run() {
+                File file = new File(Environment.getExternalStorageDirectory(), "/Javis/" + name + ".wav");
 
-            @Override
-            public void onFailure(Call<JSONObject> call, Throwable throwable) {
+                RequestBody fileBody = RequestBody.create(MediaType.parse("audio/*"), file);
+                RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), API_ID);
+                RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), API_KEY);
+                RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), DB_ID);
+                RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), VOICE_ID);
 
+                Map<String, RequestBody> reqMap = new HashMap<String, RequestBody>();
+
+                reqMap.put("file", fileBody);
+                reqMap.put("apiId", apiId);
+                reqMap.put("dbId", dbId);
+                reqMap.put("apiKey", apiKey);
+                reqMap.put("voiceId", voiceId);
+
+                Call<JSONObject> call = voiceApi.setVoice(reqMap);
+                call.enqueue(new Callback<JSONObject>() {
+                    @Override
+                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                        //TODO callSetVoiceAPI 채우기
+                    }
+
+                    @Override
+                    public void onFailure(Call<JSONObject> call, Throwable throwable) {
+
+                    }
+                });
             }
-        });
+        }).start();
     }
 
     public void callGetVoiceAPI() {

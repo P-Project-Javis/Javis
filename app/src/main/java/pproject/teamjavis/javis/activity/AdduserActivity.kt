@@ -6,10 +6,12 @@
 package pproject.teamjavis.javis.activity
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.CallApi
 import pproject.teamjavis.javis.util.DatabaseHelper
 import pproject.teamjavis.javis.util.VoiceRecorder
 
@@ -52,13 +54,12 @@ class AdduserActivity: BaseActivity() {
         }
 
         adduser_recordButton.setOnClickListener {
-            if(!isRecording)
+            if(!isRecording) {
                 startRecording(name)
-            else {
-                stopRecording()
-                adduser_confirmButton.visibility = View.VISIBLE
+                autoStopRecording()
             }
-
+            else
+                stopRecording()
         }
 
         adduser_confirmButton.visibility = View.GONE
@@ -83,12 +84,22 @@ class AdduserActivity: BaseActivity() {
         isVoiceChecked = true
         adduser_voiceChecker.setImageResource(R.drawable.ic_check_box_black_24dp)
         isRecording = false
+        adduser_confirmButton.visibility = View.VISIBLE
+    }
+
+    private fun autoStopRecording() {
+        Handler().postDelayed(Runnable {
+            stopRecording()
+        }, 19000)
     }
 
     private fun addUser() {
         val db = DatabaseHelper(applicationContext)
         val fileName = recorder!!.fileName
-
+/*
+        val api = CallApi()
+        api.callSetVoiceApi(name)
+*/
         db.openWritable()
         db.insert(name, fileName, 1, 1, 0, 0)
         db.close()
