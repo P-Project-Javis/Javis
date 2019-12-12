@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.VoiceRecorder
+import pproject.teamjavis.javis.util.api.STTApi
 
 class MainActivity: BaseActivity() {
     companion object {
@@ -126,5 +127,9 @@ class MainActivity: BaseActivity() {
         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
+
+        val api = STTApi(applicationContext, "order")
+        val response = api.connect()
+        main_message.text = response
     }
 }
