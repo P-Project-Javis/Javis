@@ -3,7 +3,7 @@
 
 해당 앱을 사용한 새 사용자를 등록할 수 있는 액티비티. 새 사용자 등록 시 권한 설정도 가능.
  */
-package pproject.teamjavis.javis.activity
+package pproject.teamjavis.javis.ui.activity
 
 import android.os.Bundle
 import android.os.Handler

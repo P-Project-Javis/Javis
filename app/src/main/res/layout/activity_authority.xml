@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.AuthorityActivity">
+    tools:context=".ui.activity.AuthorityActivity">
 
     <include android:id="@+id/authority_topbar"
         layout="@layout/layout_topbar"/>

@@ -1,7 +1,7 @@
 /*
 ExpandableListView의 자식 리스트 아이템 데이터 클래스.
  */
-package pproject.teamjavis.javis.item
+package pproject.teamjavis.javis.ui.item
 
 import android.graphics.drawable.Drawable
 
