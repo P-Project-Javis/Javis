@@ -96,10 +96,10 @@ class AdduserActivity: BaseActivity() {
     private fun addUser() {
         val db = DatabaseHelper(applicationContext)
         val fileName = recorder!!.fileName
-/*
+
         val api = CallApi()
         api.callSetVoiceApi(name)
-*/
+
         db.openWritable()
         db.insert(name, fileName, 1, 1, 0, 0)
         db.close()
