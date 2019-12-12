@@ -12,4 +12,5 @@ public class RetroFitConnection {
             .build();
 
     public STTInterface stt = retrofit.create(STTInterface.class);
+    public TTSInterface tts = retrofit.create(TTSInterface.class);
 }

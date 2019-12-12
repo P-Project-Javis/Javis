@@ -11,7 +11,7 @@ import retrofit2.http.Part;
 public interface STTInterface {
     @Multipart
     @POST("/api/stt/")
-    Call<STTItem> sttExec(
+    Call<STTItem> exec(
             @Part("ID")RequestBody id,
             @Part("key")RequestBody key,
             @Part("lang")RequestBody lang,

@@ -2,7 +2,6 @@ package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
 import android.os.Environment;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -41,7 +40,7 @@ public class STTApi {
         RequestBody cmd = RequestBody.create(MediaType.parse("text/plain"), "runFileStt");
 
         RetroFitConnection connection = new RetroFitConnection();
-        Call<STTItem> call = connection.stt.sttExec(id, key, lang, sampling, level, cmd, uploadFile);
+        Call<STTItem> call = connection.stt.exec(id, key, lang, sampling, level, cmd, uploadFile);
         call.enqueue(new Callback<STTItem>() {
             @Override
             public void onResponse(Call<STTItem> call, Response<STTItem> response) {
