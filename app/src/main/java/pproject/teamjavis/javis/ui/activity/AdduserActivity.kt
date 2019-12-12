@@ -11,9 +11,9 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.CallApi
 import pproject.teamjavis.javis.util.DatabaseHelper
 import pproject.teamjavis.javis.util.VoiceRecorder
-
 
 class AdduserActivity: BaseActivity() {
     private var isNameChecked = false
@@ -104,5 +104,4 @@ class AdduserActivity: BaseActivity() {
         db.insert(name, fileName, 1, 1, 0, 0)
         db.close()
     }
-}
 }

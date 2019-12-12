@@ -25,6 +25,7 @@ class AuthorityActivity: BaseActivity() {
 
         val db = DatabaseHelper(applicationContext)
         db.openReadable()
+      
         val data = db.selectAll()
         if(data != null)
             adapter.add(db.selectAll())

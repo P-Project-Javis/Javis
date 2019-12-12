@@ -53,7 +53,7 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
         icon.setImageDrawable(item.icon)
         title.text = item.title
         switch.isChecked = item.isChecked
-
+      
         switch.setOnClickListener {
             val db = DatabaseHelper(context)
 

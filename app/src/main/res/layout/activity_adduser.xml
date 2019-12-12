@@ -56,11 +56,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="10dp"
         android:layout_margin="20dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:text="목소리를 녹음하세요"
             style="@style/SettingTitleStyle"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="* 최대 20초까지만 가능합니다.\n* 배경음악이 없도록 녹음하세요.\n* 다른 사람의 목소리와 섞이지 않게 녹음하세요."/>
 
         <ImageButton
             android:id="@+id/adduser_recordButton"

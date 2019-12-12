@@ -19,16 +19,18 @@ class SettingActivity: BaseActivity() {
         topbar_activityTitle.text = resources.getString(R.string.title_setting)
 
         topbar_backButton.setOnClickListener { finish() }
-
+      
         setting_lookup.setOnClickListener {
             val popup = UserListPopup(applicationContext)
             popup.setMode(UserListPopup.MODE_LOOKUP)
             popup.pop(setting_parent)
         }
+
         setting_adduser.setOnClickListener {
             val intent = Intent(applicationContext, AdduserActivity::class.java)
             startActivity(intent)
         }
+
         setting_removeUser.setOnClickListener {
             val popup = UserListPopup(applicationContext)
             popup.setMode(UserListPopup.MODE_DELETE)
