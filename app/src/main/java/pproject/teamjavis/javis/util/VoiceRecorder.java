@@ -53,7 +53,7 @@ public class VoiceRecorder {
     private PullableSource mic() {
         return new PullableSource.Default(
                 new AudioRecordConfig.Default(
-                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 44100)
+                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 16000)
                 );
     }
 
