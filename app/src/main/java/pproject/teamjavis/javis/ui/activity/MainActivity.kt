@@ -22,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.OrderManager
 import pproject.teamjavis.javis.util.PlayManager
 import pproject.teamjavis.javis.util.RecordManager
 import pproject.teamjavis.javis.util.api.STTApi
@@ -139,11 +140,13 @@ class MainActivity: BaseActivity() {
         main_mic.setImageResource(R.drawable.ic_refresh_black_24dp)
         main_message.text = "결과 받아오는 중..."
         Handler().postDelayed( {
-            val tts =  TTSApi(applicationContext, stt.result)
+            val orderManager = OrderManager()
+            val order = orderManager.understandOrder(stt.result)
+            val tts =  TTSApi(applicationContext, order)
             tts.connect()
             Handler().postDelayed( {
                 main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                main_message.text = stt.result + "\n계속하려면 이미지를 누른 후 말해주세요"
+                main_message.text = "$order\n계속하려면 이미지를 누른 후 말해주세요"
                 val player = PlayManager(applicationContext, "response")
                 player.play()
             }, 2000)
