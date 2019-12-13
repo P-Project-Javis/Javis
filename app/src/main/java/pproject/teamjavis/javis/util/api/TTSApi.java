@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,14 +58,12 @@ public class TTSApi {
 
             byte[] fileReader = new byte[4096];
             long fileSize = body.contentLength();
-            long fileSizeDownloaded = 0;
 
             while(true) {
                 int read = inputStream.read(fileReader);
                 if(read == -1)
                     break;
                 outputStream.write(fileReader, 0, read);
-                fileSizeDownloaded += read;
             }
             outputStream.flush();
 

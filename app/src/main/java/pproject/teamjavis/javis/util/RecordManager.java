@@ -21,7 +21,7 @@ import omrecorder.PullTransport;
 import omrecorder.PullableSource;
 import omrecorder.Recorder;
 
-public class VoiceRecorder {
+public class RecordManager {
     Recorder recorder;
     String fileName;
 

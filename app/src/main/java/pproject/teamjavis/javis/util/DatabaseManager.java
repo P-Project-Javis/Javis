@@ -10,12 +10,12 @@ import pproject.teamjavis.javis.R;
 import pproject.teamjavis.javis.ui.item.AuthorityChildItem;
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseManager extends SQLiteOpenHelper {
     private Context context;
     private String dbName;
     private SQLiteDatabase db;
 
-    public DatabaseHelper(Context context) {
+    public DatabaseManager(Context context) {
         super(context, "javis", null, 1);
         this.context = context;
         dbName = "javis";

@@ -10,7 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
-import pproject.teamjavis.javis.util.DatabaseHelper
+import pproject.teamjavis.javis.util.DatabaseManager
 import java.io.File
 
 class UserListDeleteAdapter: BaseAdapter() {
@@ -32,7 +32,7 @@ class UserListDeleteAdapter: BaseAdapter() {
 
         name.text = item.name
         button.setOnClickListener {
-            val db = DatabaseHelper(context)
+            val db = DatabaseManager(context)
             db.openWritable()
             db.delete(item.name)
             db.close()

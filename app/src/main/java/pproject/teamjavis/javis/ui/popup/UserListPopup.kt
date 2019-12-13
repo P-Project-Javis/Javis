@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.layout_user_list.view.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.adapter.UserListDeleteAdapter
 import pproject.teamjavis.javis.ui.adapter.UserListLookupAdapter
-import pproject.teamjavis.javis.util.DatabaseHelper
+import pproject.teamjavis.javis.util.DatabaseManager
 
 class UserListPopup(context: Context) {
     companion object {
@@ -37,7 +37,7 @@ class UserListPopup(context: Context) {
                 val adapter = UserListLookupAdapter()
                 popupView.user_list_listView.adapter = adapter
 
-                val db = DatabaseHelper(context)
+                val db = DatabaseManager(context)
                 db.openReadable()
                 val items = db.selectAll()
                 if(items != null) {
@@ -50,7 +50,7 @@ class UserListPopup(context: Context) {
                 val adapter = UserListDeleteAdapter()
                 popupView.user_list_listView.adapter = adapter
 
-                val db = DatabaseHelper(context)
+                val db = DatabaseManager(context)
                 db.openReadable()
                 val items = db.selectAll()
                 if(items != null) {

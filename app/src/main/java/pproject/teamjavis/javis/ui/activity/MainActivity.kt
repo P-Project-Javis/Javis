@@ -22,7 +22,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
-import pproject.teamjavis.javis.util.VoiceRecorder
+import pproject.teamjavis.javis.util.RecordManager
 import pproject.teamjavis.javis.util.api.STTApi
 import pproject.teamjavis.javis.util.api.TTSApi
 
@@ -33,13 +33,13 @@ class MainActivity: BaseActivity() {
     
     private var isMenuOpen = false
     private var isRecording = false
-    private var recorder = VoiceRecorder()
+    private var recorder = RecordManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_close)
 
-        recorder = VoiceRecorder()
+        recorder = RecordManager()
 
         main_menuButton.setOnClickListener {
             if(!isMenuOpen) {
@@ -129,12 +129,15 @@ class MainActivity: BaseActivity() {
         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
+        getResponse()
+    }
 
+    private fun getResponse() {
         val stt = STTApi(applicationContext, "order")
         stt.connect()
-        Handler().postDelayed(Runnable {
+        Handler().postDelayed( {
             main_message.text = stt.result
-            val tts = TTSApi(applicationContext, stt.result)
+            val tts =  TTSApi(applicationContext, stt.result)
             tts.connect()
         }, 2000)
     }

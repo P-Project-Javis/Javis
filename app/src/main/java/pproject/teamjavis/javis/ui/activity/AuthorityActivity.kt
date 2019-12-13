@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_authority.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.adapter.AuthorityListAdapter
-import pproject.teamjavis.javis.util.DatabaseHelper
+import pproject.teamjavis.javis.util.DatabaseManager
 
 class AuthorityActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class AuthorityActivity: BaseActivity() {
         val adapter = AuthorityListAdapter()
         authority_list.setAdapter(adapter)
 
-        val db = DatabaseHelper(applicationContext)
+        val db = DatabaseManager(applicationContext)
         db.openReadable()
       
         val data = db.selectAll()

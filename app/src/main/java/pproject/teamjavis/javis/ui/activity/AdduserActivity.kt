@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.CallApi
-import pproject.teamjavis.javis.util.DatabaseHelper
-import pproject.teamjavis.javis.util.VoiceRecorder
+import pproject.teamjavis.javis.util.DatabaseManager
+import pproject.teamjavis.javis.util.RecordManager
 
 class AdduserActivity: BaseActivity() {
     private var isNameChecked = false
@@ -21,7 +21,7 @@ class AdduserActivity: BaseActivity() {
     private var isRecording = false
 
     private var name: String = "이름미지정"
-    private var recorder = VoiceRecorder()
+    private var recorder = RecordManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class AdduserActivity: BaseActivity() {
             name = adduser_inputName.text.toString()
             //이름 공백 여부 확인
             if(name != "") {
-                val db = DatabaseHelper(applicationContext)
+                val db = DatabaseManager(applicationContext)
                 db.openReadable()
                 //이름 중복 여부 확인
                 if(db.checkName(name)) {
@@ -94,7 +94,7 @@ class AdduserActivity: BaseActivity() {
     }
 
     private fun addUser() {
-        val db = DatabaseHelper(applicationContext)
+        val db = DatabaseManager(applicationContext)
         val fileName = recorder!!.fileName
 
         val api = CallApi()
