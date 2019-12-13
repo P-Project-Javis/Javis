@@ -1,6 +1,14 @@
 package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
+import android.os.Environment;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import okhttp3.ResponseBody;
 import pproject.teamjavis.javis.R;
@@ -31,7 +39,7 @@ public class TTSApi {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()) {
-                    
+                    writeAudio(response.body());
                 }
             }
 
@@ -40,5 +48,33 @@ public class TTSApi {
 
             }
         });
+    }
+
+    private void writeAudio(ResponseBody body) {
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(), "/Javis/response.wav");
+
+            InputStream inputStream = body.byteStream();
+            OutputStream outputStream = new FileOutputStream(file);
+
+            byte[] fileReader = new byte[4096];
+            long fileSize = body.contentLength();
+            long fileSizeDownloaded = 0;
+
+            while(true) {
+                int read = inputStream.read(fileReader);
+                if(read == -1)
+                    break;
+                outputStream.write(fileReader, 0, read);
+                fileSizeDownloaded += read;
+            }
+            outputStream.flush();
+
+            inputStream.close();
+            outputStream.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

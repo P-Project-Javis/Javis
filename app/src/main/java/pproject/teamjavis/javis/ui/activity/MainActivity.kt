@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.VoiceRecorder
 import pproject.teamjavis.javis.util.api.STTApi
+import pproject.teamjavis.javis.util.api.TTSApi
 
 class MainActivity: BaseActivity() {
     companion object {
@@ -129,10 +130,12 @@ class MainActivity: BaseActivity() {
         main_message.text = resources.getText(R.string.message_notrecording)
         isRecording = false
 
-        val api = STTApi(applicationContext, "order")
-        api.connect()
+        val stt = STTApi(applicationContext, "order")
+        stt.connect()
         Handler().postDelayed(Runnable {
-            main_message.text = api.result
-        }, 1000)
+            main_message.text = stt.result
+            val tts = TTSApi(applicationContext, stt.result)
+            tts.connect()
+        }, 2000)
     }
 }
