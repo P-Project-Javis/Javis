@@ -10,11 +10,11 @@ public class OrderManager {
             "주문이 완료되었습니다.", "이해하지 못했습니다. 다시 말해주세요."
     };
 
-    private String what = null;
-    private String how = null;
-
     public String understandOrder(String order) {
         String[] parsed;
+        String object = null;
+        String control = null;
+
         try {
             parsed = order.split(" ");
         }
@@ -27,60 +27,67 @@ public class OrderManager {
             switch (parsed[0]) {
                 case "티비":
                 case "텔레비전":
-                    what = "티비";
+                    object = "티비";
                     break;
                 case "조명":
                 case "불":
-                    what = "조명";
+                    object = "조명";
                     break;
                 case "가스":
                 case "가스불":
                 case "가스레인지":
-                    what = "가스레인지";
+                    object = "가스레인지";
                     break;
                 case "주문":
-                    what = "주문";
+                    object = "주문";
                     break;
             }
-            Log.v(this.getClass().getSimpleName(), "객체: " + what);
-
             switch (parsed[1]) {
-                case "켜줘":
-                    how = "켜기";
+                case "켜줘\n":
+                case "켜조\n":
+                case "켜죠\n":
+                case "켜\n":
+                    control = "켜기";
                     break;
-                case "꺼줘":
-                    how = "끄기";
+                case "꺼줘\n":
+                case "꺼조\n":
+                case "꺼죠\n":
+                case "꺼\n":
+                    control = "끄기";
                     break;
             }
-            Log.v(this.getClass().getSimpleName(), "수행: " + how);
 
-            if(what == null || how == null)
+            Log.v(this.getClass().getSimpleName(), "객체: " + object);
+            Log.v(this.getClass().getSimpleName(), "수행: " + control);
+
+            if(object == null || control == null)
                 return resultStr[7];
             else {
-                if(what.equals("티비")) {
-                    if(how == "켜기")
+                if(object.equals("티비")) {
+                    if(control.equals("켜기"))
                         return resultStr[0];
-                    if(how == "끄기")
+                    if(control.equals("끄기"))
                         return resultStr[1];
                 }
-                if(what.equals("조명")) {
-                    if(how == "켜기")
+                if(object.equals("조명")) {
+                    if(control.equals("켜기"))
                         return resultStr[2];
-                    if(how == "끄기")
+                    if(control.equals("끄기"))
                         return resultStr[3];
                 }
-                if(what.equals("가스레인지")) {
-                    if(how == "켜기")
+                if(object.equals("가스레인지")) {
+                    if(control.equals("켜기"))
                         return resultStr[4];
-                    if(how == "끄기")
+                    if(control.equals("끄기"))
                         return resultStr[5];
                 }
-                else if(what.equals("주문"))
+                else if(object.equals("주문"))
                     return resultStr[6];
                 else
                     return resultStr[7];
             }
         }
         return resultStr[7];
+
     }
 }
