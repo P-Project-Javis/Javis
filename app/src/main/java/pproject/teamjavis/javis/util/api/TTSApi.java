@@ -2,6 +2,7 @@ package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.Handler;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,9 +44,7 @@ public class TTSApi {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
+            public void onFailure(Call<ResponseBody> call, Throwable t) { }
         });
     }
 

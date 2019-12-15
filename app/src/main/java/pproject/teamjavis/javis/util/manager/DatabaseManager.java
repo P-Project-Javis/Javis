@@ -178,6 +178,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + dbName + " WHERE name='" + name + "';");
     }
 
+    public String getDbName() {
+        return dbName;
+    }
+
     private boolean int2Boolean(int value) {
         if(value > 0)
             return true;

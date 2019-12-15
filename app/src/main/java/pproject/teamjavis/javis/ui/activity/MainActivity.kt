@@ -152,7 +152,7 @@ class MainActivity: BaseActivity() {
                     "response"
                 )
                 player.play()
-            }, 2000)
-        }, 2000)
+            }, 1500)
+        }, 1500)
     }
 }
