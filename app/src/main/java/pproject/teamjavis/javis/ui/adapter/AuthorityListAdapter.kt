@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
-import pproject.teamjavis.javis.util.DatabaseManager
+import pproject.teamjavis.javis.util.manager.DatabaseManager
 
 class AuthorityListAdapter: BaseExpandableListAdapter() {
     var items = ArrayList<AuthorityParentItem>()

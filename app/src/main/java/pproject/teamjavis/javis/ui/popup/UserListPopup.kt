@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.layout_user_list.view.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.adapter.UserListDeleteAdapter
 import pproject.teamjavis.javis.ui.adapter.UserListLookupAdapter
-import pproject.teamjavis.javis.util.DatabaseManager
+import pproject.teamjavis.javis.util.manager.DatabaseManager
 
 class UserListPopup(context: Context) {
     companion object {

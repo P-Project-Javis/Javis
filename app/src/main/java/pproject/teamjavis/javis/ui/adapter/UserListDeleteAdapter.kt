@@ -10,7 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
-import pproject.teamjavis.javis.util.DatabaseManager
+import pproject.teamjavis.javis.util.manager.DatabaseManager
 import java.io.File
 
 class UserListDeleteAdapter: BaseAdapter() {

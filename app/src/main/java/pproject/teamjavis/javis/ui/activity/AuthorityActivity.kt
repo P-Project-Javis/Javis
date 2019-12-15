@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_authority.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.adapter.AuthorityListAdapter
-import pproject.teamjavis.javis.util.DatabaseManager
+import pproject.teamjavis.javis.util.manager.DatabaseManager
 
 class AuthorityActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
