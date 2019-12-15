@@ -3,7 +3,7 @@
 
 음성을 녹음하는 작업을 담당하는 클래스.
  */
-package pproject.teamjavis.javis.util;
+package pproject.teamjavis.javis.util.manager;
 
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
@@ -21,7 +21,7 @@ import omrecorder.PullTransport;
 import omrecorder.PullableSource;
 import omrecorder.Recorder;
 
-public class VoiceRecorder {
+public class RecordManager {
     Recorder recorder;
     String fileName;
 
@@ -53,7 +53,7 @@ public class VoiceRecorder {
     private PullableSource mic() {
         return new PullableSource.Default(
                 new AudioRecordConfig.Default(
-                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 44100)
+                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT, AudioFormat.CHANNEL_IN_MONO, 16000)
                 );
     }
 

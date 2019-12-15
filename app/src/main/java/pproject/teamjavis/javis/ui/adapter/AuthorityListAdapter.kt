@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
-import pproject.teamjavis.javis.util.DatabaseHelper
+import pproject.teamjavis.javis.util.manager.DatabaseManager
 
 class AuthorityListAdapter: BaseExpandableListAdapter() {
     var items = ArrayList<AuthorityParentItem>()
@@ -55,7 +55,7 @@ class AuthorityListAdapter: BaseExpandableListAdapter() {
         switch.isChecked = item.isChecked
       
         switch.setOnClickListener {
-            val db = DatabaseHelper(context)
+            val db = DatabaseManager(context)
 
             val valChecked = switch.isChecked
 

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Javis</string>
 
+    <string name="api_id">gachon.pproject.3536baa2f4192</string>
+    <string name="api_key">d5df40b1400a4ae1bc53c1539e8a68cd</string>
+
     <string name="title_setting">설정</string>
     <string name="title_new">새 사용자 등록</string>
     <string name="title_lock">사용자 권한 설정</string>
