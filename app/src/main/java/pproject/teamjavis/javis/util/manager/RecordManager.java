@@ -3,7 +3,7 @@
 
 음성을 녹음하는 작업을 담당하는 클래스.
  */
-package pproject.teamjavis.javis.util;
+package pproject.teamjavis.javis.util.manager;
 
 import android.media.AudioFormat;
 import android.media.MediaRecorder;

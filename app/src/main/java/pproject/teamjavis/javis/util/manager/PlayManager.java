@@ -1,4 +1,4 @@
-package pproject.teamjavis.javis.util;
+package pproject.teamjavis.javis.util.manager;
 
 import android.content.Context;
 import android.media.MediaPlayer;
