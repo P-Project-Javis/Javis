@@ -2,6 +2,7 @@ package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.Handler;
 
 import com.google.gson.Gson;
 
@@ -21,7 +22,6 @@ public class STTApi {
     private File file;
     private RequestBody requestFile;
     private MultipartBody.Part uploadFile;
-
     private String result;
 
     public STTApi(Context context, String fileName) {
