@@ -11,6 +11,7 @@ public class RetroFitConnection {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+    public DeleteVoiceInterface deleteVoice = retrofit.create(DeleteVoiceInterface.class);
     public RecogVoiceInterface recogVoice = retrofit.create(RecogVoiceInterface.class);
     public SetVoiceInterface setVoice = retrofit.create(SetVoiceInterface.class);
     public STTInterface stt = retrofit.create(STTInterface.class);
