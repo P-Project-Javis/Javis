@@ -11,7 +11,6 @@
 package pproject.teamjavis.javis.ui.activity
 
 import android.Manifest
-import android.animation.TimeInterpolator
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -31,6 +30,7 @@ import pproject.teamjavis.javis.util.manager.PlayManager
 import pproject.teamjavis.javis.util.manager.RecordManager
 import pproject.teamjavis.javis.util.api.STTApi
 import pproject.teamjavis.javis.util.api.TTSApi
+import pproject.teamjavis.javis.util.manager.DatabaseManager
 
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
@@ -150,34 +150,160 @@ class MainActivity: BaseActivity() {
     }
 
     private fun getResponse() {
+        //stt와 화자인증 api 실행
         val stt = STTApi(applicationContext, "order")
         stt.connect()
         main_mic.setImageResource(R.drawable.ic_refresh_black_24dp)
         main_message.text = "결과 받아오는 중..."
         val recog = RecogVoiceApi(applicationContext, "order")
         recog.connect()
+
         Handler().postDelayed( {
+            //1.5초 후 stt 결과를 가져온 후 성공시 다음으로 진행, 아니면 실패 메세지
+            val voiceId = recog.voiceId
             if(recog.isSuccess) {
-                makeToast("성공")
-                val orderManager = OrderManager()
-                val order = orderManager.understandOrder(stt.result)
-                val tts =  TTSApi(applicationContext, order)
-                tts.connect()
-                Handler().postDelayed( {
-                    makeToast(recog.voiceId)
-                    main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                    main_message.text = "${stt.result}\n$order\n계속하려면 이미지를 누른 후 말해주세요"
-                    val player = PlayManager(
-                        applicationContext,
-                        "response"
-                    )
-                    player.play()
-                }, 1500)
+                if(voiceId != "__no__match__") {
+                    //voiceId가 no match가 아니면
+                    val orderManager = OrderManager()
+                    val order = orderManager.understandOrder(stt.result)
+                    val db = DatabaseManager(applicationContext)
+                    db.openReadable()
+                    //db에서 voiceId와 일치하는 이름이 있는지 확인
+                    if(db.checkName(voiceId)) {
+                        //db에 이름이 있는 경우
+                        val kind = orderManager.kind
+                        when(kind) {
+                            //db에 해당 사용자의 권한이 있는지 체크
+                            "티비" -> {
+                                if(db.checkTv(voiceId)) {
+                                    //권한이 있는 경우 명령 실행
+                                    val tts = TTSApi(applicationContext, order)
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                                else {
+                                    //권한이 없는 경우 메세지 출력
+                                    val tts = TTSApi(applicationContext, "권한이 없습니다")
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                            }
+                            "조명" -> {
+                                if(db.checkLight(voiceId)) {
+                                    val tts = TTSApi(applicationContext, order)
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                                else {
+                                    val tts = TTSApi(applicationContext, "권한이 없습니다")
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                            }
+                            "가스레인지" -> {
+                                if(db.checkGas(voiceId)) {
+                                    val tts = TTSApi(applicationContext, order)
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                                else {
+                                    val tts = TTSApi(applicationContext, "권한이 없습니다")
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                            }
+                            "주문" -> {
+                                if(db.checkBuy(voiceId)) {
+                                    val tts = TTSApi(applicationContext, order)
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                                else {
+                                    val tts = TTSApi(applicationContext, "권한이 없습니다")
+                                    tts.connect()
+                                    Handler().postDelayed( {
+                                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        val player = PlayManager(applicationContext, "response")
+                                        player.play()
+                                    }, 1500)
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        //db에 이름이 없는 경우
+                        val tts = TTSApi(applicationContext, "등록된 사용자가 아닙니다.")
+                        tts.connect()
+                        Handler().postDelayed( {
+                            //등록된 사용자가 아니라는 메세지 출력
+                            main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                            main_message.text = "등록된 사용자가 아닙니다\n\n계속하려면 이미지를 누른 후 말해주세요"
+                            val player = PlayManager(applicationContext, "response")
+                            player.play()
+                        }, 1500)
+                    }
+                    db.close()
+                }
+                else {
+                    //voiceId가 no match인 경우
+                    val tts = TTSApi(applicationContext, "등록된 사용자가 아닙니다.")
+                    tts.connect()
+                    Handler().postDelayed( {
+                        //등록된 사용자가 아니라는 메세지 출력
+                        main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                        main_message.text = "등록된 사용자가 아닙니다\n\n계속하려면 이미지를 누른 후 말해주세요"
+                        val player = PlayManager(applicationContext, "response")
+                        player.play()
+                    }, 1500)
+                }
             }
             else {
-                main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                main_message.text = "결과를 불러오는 데 실패했습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
-                makeToast("실패")
+                //화자인증 실패시 오류 메세지 출력
+                val tts = TTSApi(applicationContext, recog.voiceId)
+                tts.connect()
+                Handler().postDelayed( {
+                    main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                    main_message.text = "${recog.voiceId}\n\n계속하려면 이미지를 누른 후 말해주세요"
+                    val player = PlayManager(applicationContext, "response")
+                    player.play()
+                }, 1500)
+
             }
         }, 1500)
 

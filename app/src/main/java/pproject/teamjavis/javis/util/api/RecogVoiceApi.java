@@ -46,10 +46,12 @@ public class RecogVoiceApi {
                 Gson gson = new Gson();
                 if(response.isSuccessful()) {
                     isSuccess = true;
-                    voiceId = response.body().toString();
+                    voiceId = parser(response.body().toString());
+
                 }
                 else {
                     isSuccess = false;
+                    voiceId = parser(response.body().toString());
                 }
             }
 
@@ -66,5 +68,20 @@ public class RecogVoiceApi {
 
     public String getVoiceId() {
         return voiceId;
+    }
+
+    private String parser(String data) {
+        if(data.contains("id=") && data.contains(", voiceVector=")) {
+            int index1 = data.indexOf("id=");
+            int index2 = data.indexOf(", voiceVector=");
+
+            if (!(index1 < 0 || index2 < 0)) {
+                return data.substring(index1 + 3, index2);
+            }
+            else
+                return "화자인증에 실패했습니다";
+        }
+
+        return "화자인증에 실패했습니다";
     }
 }

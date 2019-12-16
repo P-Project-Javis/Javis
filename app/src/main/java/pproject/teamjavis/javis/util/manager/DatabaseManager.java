@@ -11,6 +11,11 @@ import pproject.teamjavis.javis.ui.item.AuthorityChildItem;
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem;
 
 public class DatabaseManager extends SQLiteOpenHelper {
+    public static final int AUTHORITY_TV = 1;
+    public static final int AUTHORITY_LIGHT = 2;
+    public static final int AUTHORITY_GAS = 3;
+    public static final int AUTHORITY_BUY = 4;
+
     private Context context;
     private String dbName;
     private SQLiteDatabase db;
@@ -172,6 +177,46 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         else
             return true;
+    }
+
+    public boolean checkTv(String name) {
+        AuthorityParentItem item = select(name);
+        ArrayList<AuthorityChildItem> list = item.getAuthorityList();
+
+        if(list.get(0).isChecked())
+            return true;
+        else
+            return false;
+    }
+
+    public boolean checkLight(String name) {
+        AuthorityParentItem item = select(name);
+        ArrayList<AuthorityChildItem> list = item.getAuthorityList();
+
+        if(list.get(1).isChecked())
+            return true;
+        else
+            return false;
+    }
+
+    public boolean checkGas(String name) {
+        AuthorityParentItem item = select(name);
+        ArrayList<AuthorityChildItem> list = item.getAuthorityList();
+
+        if(list.get(2).isChecked())
+            return true;
+        else
+            return false;
+    }
+
+    public boolean checkBuy(String name) {
+        AuthorityParentItem item = select(name);
+        ArrayList<AuthorityChildItem> list = item.getAuthorityList();
+
+        if(list.get(3).isChecked())
+            return true;
+        else
+            return false;
     }
 
     public void delete(String name) {
