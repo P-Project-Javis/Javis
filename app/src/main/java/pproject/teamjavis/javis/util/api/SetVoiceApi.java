@@ -3,6 +3,9 @@ package pproject.teamjavis.javis.util.api;
 import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.io.File;
 
@@ -32,27 +35,35 @@ public class SetVoiceApi {
     }
 
     public void connect() {
+        Log.v(this.getClass().getSimpleName(), "SetVoice 실행");
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "???");
-        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), "javis" + fileName);
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
+        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), fileName);
 
         final RetroFitConnection connection = new RetroFitConnection();
         Call<ResponseBody> call = connection.setVoice.exec(apiId, apiKey, dbId, voiceId, uploadFile);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful())
+                Gson gson = new Gson();
+                if(response.isSuccessful()) {
                     isSuccess = true;
-                else
+                    Log.v(this.getClass().getSimpleName(), "SetVoice 성공");
+                }
+                else {
                     isSuccess = false;
+                    Log.v(this.getClass().getSimpleName(), "SetVoice 서버와의 연결은 되었으나 실패");
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 isSuccess = false;
+                Log.v(this.getClass().getSimpleName(), "SetVoice 서버와의 연결이 실패");
             }
         });
+        Log.v(this.getClass().getSimpleName(), "SetVoice 종료");
     }
 
     public boolean getIsSuccess() {

@@ -3,6 +3,8 @@ package pproject.teamjavis.javis.util.api;
 import android.content.Context;
 import android.os.Environment;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 
 import okhttp3.MediaType;
@@ -31,13 +33,14 @@ public class RecogVoiceApi {
     public void connect() {
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "???");
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
 
         final RetroFitConnection connection = new RetroFitConnection();
         Call<ResponseBody> call = connection.recogVoice.exec(apiId, apiKey, dbId, uploadFile);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Gson gson = new Gson();
                 if(response.isSuccessful())
                     isSuccess = true;
                 else

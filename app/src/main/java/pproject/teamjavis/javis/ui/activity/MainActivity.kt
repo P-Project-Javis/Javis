@@ -11,6 +11,7 @@
 package pproject.teamjavis.javis.ui.activity
 
 import android.Manifest
+import android.animation.TimeInterpolator
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -113,7 +114,6 @@ class MainActivity: BaseActivity() {
             if(ContextCompat.checkSelfPermission(applicationContext, permission) == PackageManager.PERMISSION_DENIED)
                 permissions.add(permission)
         }
-
 
         return if(permissions.isNotEmpty()) {
             ActivityCompat.requestPermissions(this, permissions.toArray(arrayOfNulls<String>(permissions.size)), permissionParam)

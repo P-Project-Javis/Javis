@@ -39,6 +39,7 @@ public class OrderManager {
                     object = "가스레인지";
                     break;
                 case "주문":
+                case "주문해":
                     object = "주문";
                     break;
             }
@@ -60,7 +61,7 @@ public class OrderManager {
             Log.v(this.getClass().getSimpleName(), "객체: " + object);
             Log.v(this.getClass().getSimpleName(), "수행: " + control);
 
-            if(object == null || control == null)
+            if(object == null)
                 return resultStr[7];
             else {
                 if(object.equals("티비")) {
