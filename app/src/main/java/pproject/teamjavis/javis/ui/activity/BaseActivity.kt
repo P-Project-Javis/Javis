@@ -16,10 +16,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 open class BaseActivity: AppCompatActivity() {
-    private var Tag: String = this::class.java.simpleName
+    private var tag: String = this::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,22 +60,10 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     fun log(text: String) {
-        Log.v(Tag, text)
+        Log.v(tag, text)
     }
 
     fun makeToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
-    fun checkPermission(): Int {
-        val micPermission = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.RECORD_AUDIO)
-        val writeStoragePermission = ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-        if(micPermission == PackageManager.PERMISSION_GRANTED && writeStoragePermission == PackageManager.PERMISSION_GRANTED) {
-            return PackageManager.PERMISSION_GRANTED
-        }
-        else {
-            return PackageManager.PERMISSION_DENIED
-        }
     }
 }
