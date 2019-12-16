@@ -27,7 +27,7 @@ public class STTApi {
     public STTApi(Context context, String fileName) {
         this.context = context;
         file = new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
-        requestFile = RequestBody.create(MediaType.parse("multipart/from-data"), file);
+        requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         uploadFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
     }
 

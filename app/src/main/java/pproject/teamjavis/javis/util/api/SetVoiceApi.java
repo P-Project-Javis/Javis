@@ -61,6 +61,7 @@ public class SetVoiceApi {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 isSuccess = false;
                 Log.v(this.getClass().getSimpleName(), "SetVoice 서버와의 연결이 실패");
+                Log.v(this.getClass().getSimpleName(), "SetVoice 종료2");
             }
         });
         Log.v(this.getClass().getSimpleName(), "SetVoice 종료");
