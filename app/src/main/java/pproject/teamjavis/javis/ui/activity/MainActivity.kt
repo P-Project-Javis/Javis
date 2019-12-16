@@ -343,6 +343,6 @@ class MainActivity: BaseActivity() {
         }
     }
 
-    private fun controlBuy(value: Boolean) {
+    private fun controlBuy() {
     }
 }
