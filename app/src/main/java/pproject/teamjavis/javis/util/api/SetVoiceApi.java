@@ -30,7 +30,7 @@ public class SetVoiceApi {
         this.context = context;
         this.fileName = fileName;
         file = new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
-        requestFile = RequestBody.create(MediaType.parse("multipart/from-data"), file);
+        requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         uploadFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
     }
 
@@ -61,6 +61,7 @@ public class SetVoiceApi {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 isSuccess = false;
                 Log.v(this.getClass().getSimpleName(), "SetVoice 서버와의 연결이 실패");
+                Log.v(this.getClass().getSimpleName(), "SetVoice 종료2");
             }
         });
         Log.v(this.getClass().getSimpleName(), "SetVoice 종료");
