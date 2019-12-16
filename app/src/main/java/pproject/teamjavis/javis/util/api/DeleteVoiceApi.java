@@ -1,6 +1,9 @@
 package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
+
+import com.google.gson.Gson;
+
 import okhttp3.ResponseBody;
 import pproject.teamjavis.javis.R;
 import pproject.teamjavis.javis.util.item.DeleteVoiceItem;
@@ -22,7 +25,7 @@ public class DeleteVoiceApi {
         DeleteVoiceItem request = new DeleteVoiceItem();
         request.setApiId(context.getString(R.string.api_id));
         request.setApiKey(context.getString(R.string.api_key));
-        request.setDbId("???");
+        request.setDbId("javis");
         request.setVoiceId(voiceId);
 
         final RetroFitConnection connection = new RetroFitConnection();
@@ -30,6 +33,7 @@ public class DeleteVoiceApi {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Gson gson = new Gson();
                 if(response.isSuccessful())
                     isSuccess = true;
                 else

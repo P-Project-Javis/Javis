@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.CallApi
+import pproject.teamjavis.javis.util.api.SetVoiceApi
 import pproject.teamjavis.javis.util.manager.DatabaseManager
 import pproject.teamjavis.javis.util.manager.RecordManager
 
@@ -56,7 +57,7 @@ class AdduserActivity: BaseActivity() {
         adduser_recordButton.setOnClickListener {
             if(!isRecording) {
                 startRecording(name)
-                autoStopRecording()
+                //autoStopRecording()
             }
             else
                 stopRecording()
@@ -66,7 +67,6 @@ class AdduserActivity: BaseActivity() {
         adduser_confirmButton.setOnClickListener {
             if(isNameChecked && isVoiceChecked) {
                 addUser()
-                finish()
             }
         }
     }
@@ -94,14 +94,23 @@ class AdduserActivity: BaseActivity() {
     }
 
     private fun addUser() {
-        val db = DatabaseManager(applicationContext)
-        val fileName = recorder!!.fileName
-
-        val api = CallApi()
-        api.callSetVoiceApi(name)
-
-        db.openWritable()
-        db.insert(name, fileName, 1, 1, 0, 0)
-        db.close()
+        val setVoice = SetVoiceApi(applicationContext, name)
+        setVoice.connect()
+        /*
+        Handler().postDelayed( {
+            if(setVoice.isSuccess) {
+                val db = DatabaseManager(applicationContext)
+                db.openWritable()
+                db.insert(name, name, 1, 1, 0, 0)
+                db.close()
+                makeToast("사용자 등록이 완료되었습니다")
+                finish()
+            }
+            else {
+                makeToast("사용자 등록에 실패했습니다")
+                finish()
+            }
+        }, 60000)
+        */
     }
 }
