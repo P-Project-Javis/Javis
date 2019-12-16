@@ -13,6 +13,7 @@ package pproject.teamjavis.javis.ui.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.transition.ChangeBounds
@@ -20,6 +21,7 @@ import android.transition.TransitionManager
 import android.view.animation.AccelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.util.manager.OrderManager
@@ -29,13 +31,12 @@ import pproject.teamjavis.javis.util.api.STTApi
 import pproject.teamjavis.javis.util.api.TTSApi
 
 class MainActivity: BaseActivity() {
-    companion object {
-        const val PERMISSION = 1
-    }
-    
     private var isMenuOpen = false
     private var isRecording = false
     private var recorder = RecordManager()
+
+    private val permissions = ArrayList<String>()
+    private val permissionParam = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,31 +82,44 @@ class MainActivity: BaseActivity() {
                 stopRecording()
         }
 
-        if(checkPermission() == PackageManager.PERMISSION_DENIED) {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO),
-                    PERMISSION
-                )
+        val permissionList = listOf(
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+
+        if(Build.VERSION.SDK_INT >= 23) {
+            checkPermission(permissionList)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode) {
+            permissionParam -> {
+                if(grantResults.isNotEmpty()) {
+                    for (i in 0 until permissions.size) {
+                        if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                            makeToast("권한이 없으면 앱을 정상적으로 이용할 수 없습니다.")
+                            finish()
+                        }
+                    }
+                }
             }
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            PERMISSION -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    makeToast("승인했습니다.")
-                } else {
-                    makeToast("거부하셨습니다. 앱을 정상적으로 이용할 수 없습니다.")
-                    finish()
-                }
-                return
-            }
-            else -> {
-                makeToast("거부하셨습니다. 앱을 정상적으로 이용할 수 없습니다.")
-                finish()
-            }
+    private fun checkPermission(permissionList: List<String>): Boolean {
+        for(permission in permissionList) {
+            if(ContextCompat.checkSelfPermission(applicationContext, permission) == PackageManager.PERMISSION_DENIED)
+                permissions.add(permission)
         }
+
+
+        return if(permissions.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissions.toArray(arrayOfNulls<String>(permissions.size)), permissionParam)
+            true
+        } else
+            false
     }
 
     private fun updateView(id: Int) {
