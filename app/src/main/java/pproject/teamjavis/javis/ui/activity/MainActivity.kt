@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main_close.*
 import pproject.teamjavis.javis.R
+import pproject.teamjavis.javis.util.api.RecogVoiceApi
 import pproject.teamjavis.javis.util.manager.OrderManager
 import pproject.teamjavis.javis.util.manager.PlayManager
 import pproject.teamjavis.javis.util.manager.RecordManager
@@ -153,20 +154,32 @@ class MainActivity: BaseActivity() {
         stt.connect()
         main_mic.setImageResource(R.drawable.ic_refresh_black_24dp)
         main_message.text = "결과 받아오는 중..."
+        val recog = RecogVoiceApi(applicationContext, "order")
+        recog.connect()
         Handler().postDelayed( {
-            val orderManager = OrderManager()
-            val order = orderManager.understandOrder(stt.result)
-            val tts =  TTSApi(applicationContext, order)
-            tts.connect()
-            Handler().postDelayed( {
+            if(recog.isSuccess) {
+                makeToast("성공")
+                val orderManager = OrderManager()
+                val order = orderManager.understandOrder(stt.result)
+                val tts =  TTSApi(applicationContext, order)
+                tts.connect()
+                Handler().postDelayed( {
+                    makeToast(recog.voiceId)
+                    main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
+                    main_message.text = "${stt.result}\n$order\n계속하려면 이미지를 누른 후 말해주세요"
+                    val player = PlayManager(
+                        applicationContext,
+                        "response"
+                    )
+                    player.play()
+                }, 1500)
+            }
+            else {
                 main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                main_message.text = "${stt.result}\n$order\n계속하려면 이미지를 누른 후 말해주세요"
-                val player = PlayManager(
-                    applicationContext,
-                    "response"
-                )
-                player.play()
-            }, 1500)
+                main_message.text = "결과를 불러오는 데 실패했습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
+                makeToast("실패")
+            }
         }, 1500)
+
     }
 }
