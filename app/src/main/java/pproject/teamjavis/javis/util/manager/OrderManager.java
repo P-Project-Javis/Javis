@@ -93,4 +93,13 @@ public class OrderManager {
     public String getKind() {
         return kind;
     }
+
+    public boolean getControl() {
+        if(control == null)
+            return true;
+        else if(control.equals("켜기"))
+            return true;
+        else
+            return false;
+    }
 }

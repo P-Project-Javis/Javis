@@ -184,6 +184,8 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
+
+                                        controlTv(orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -207,6 +209,8 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
+
+                                        controlLight(orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -229,6 +233,8 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
+
+                                        controlGas(orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -251,6 +257,8 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
+
+                                        controlBuy()
                                     }, 1500)
                                 }
                                 else {
@@ -306,6 +314,35 @@ class MainActivity: BaseActivity() {
 
             }
         }, 1500)
+    }
 
+    private fun controlTv(value: Boolean) {
+        if(value) {
+
+        }
+        else {
+
+        }
+    }
+
+    private fun controlLight(value: Boolean) {
+        if(value) {
+
+        }
+        else {
+
+        }
+    }
+
+    private fun controlGas(value: Boolean) {
+        if(value) {
+
+        }
+        else {
+
+        }
+    }
+
+    private fun controlBuy(value: Boolean) {
     }
 }
