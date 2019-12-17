@@ -96,7 +96,7 @@ class AdduserActivity: BaseActivity() {
     }
 
     private fun addUser() {
-        Handler().postDelayed( {
+        //Handler().postDelayed( {
             val setVoice = SetVoiceApi(applicationContext, name)
             setVoice.connect()
 
@@ -117,6 +117,6 @@ class AdduserActivity: BaseActivity() {
                     finish()
                 }
             }, 1500)
-        }, 500)
+        //}, 500)
     }
 }

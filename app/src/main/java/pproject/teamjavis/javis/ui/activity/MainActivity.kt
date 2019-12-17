@@ -164,6 +164,7 @@ class MainActivity: BaseActivity() {
             if(recog.isSuccess) {
                 if(voiceId != "__no__match__") {
                     //voiceId가 no match가 아니면
+                    makeToast(voiceId)
                     val orderManager = OrderManager()
                     val order = orderManager.understandOrder(stt.result)
                     val db = DatabaseManager(applicationContext)

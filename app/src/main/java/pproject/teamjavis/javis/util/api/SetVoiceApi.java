@@ -49,11 +49,11 @@ public class SetVoiceApi {
                 Gson gson = new Gson();
                 if(response.isSuccessful()) {
                     isSuccess = true;
-                    Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
                 }
                 else {
                     isSuccess = false;
-                    Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
                 }
             }
 

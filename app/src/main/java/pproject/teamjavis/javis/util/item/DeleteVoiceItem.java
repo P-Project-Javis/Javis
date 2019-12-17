@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class DeleteVoiceItem {
-    private String apiId;
-    private String apiKey;
-    private String dbId;
-    private String voiceId;
+    private SetVoiceItem.SubMessage message;
+
+    class SubMessage {
+        private String message;
+        private String status;
+    }
 }

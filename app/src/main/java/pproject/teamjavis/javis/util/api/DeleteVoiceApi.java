@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import pproject.teamjavis.javis.R;
 import pproject.teamjavis.javis.util.item.DeleteVoiceItem;
@@ -22,17 +24,16 @@ public class DeleteVoiceApi {
     }
 
     public void connect() {
-        DeleteVoiceItem request = new DeleteVoiceItem();
-        request.setApiId(context.getString(R.string.api_id));
-        request.setApiKey(context.getString(R.string.api_key));
-        request.setDbId("javis");
-        request.setVoiceId(voiceId);
+        RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
+        RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
+        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), this.voiceId);
 
         final RetroFitConnection connection = new RetroFitConnection();
-        Call<ResponseBody> call = connection.deleteVoice.exec(request);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<DeleteVoiceItem> call = connection.deleteVoice.exec(apiId, apiKey, dbId, voiceId);
+        call.enqueue(new Callback<DeleteVoiceItem>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<DeleteVoiceItem> call, Response<DeleteVoiceItem> response) {
                 Gson gson = new Gson();
                 if(response.isSuccessful())
                     isSuccess = true;
@@ -41,9 +42,13 @@ public class DeleteVoiceApi {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<DeleteVoiceItem> call, Throwable t) {
                 isSuccess = false;
             }
         });
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
     }
 }
