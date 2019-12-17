@@ -38,6 +38,7 @@ import pproject.teamjavis.javis.util.manager.DatabaseManager
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -178,7 +179,19 @@ class MainActivity: BaseActivity() {
             outputStream = socket!!.outputStream
         }
         catch (e: IOException) {
-            e.stackTrace
+            e.printStackTrace()
+        }
+    }
+
+    private fun sendData(kind: String, control: Boolean) {
+        val strControl = control.toString()
+        val data = "$kind,$strControl\n"
+
+        try {
+            outputStream!!.write(data.toByteArray())
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -246,7 +259,7 @@ class MainActivity: BaseActivity() {
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
 
-                                        controlTv(orderManager.control)
+                                        sendData("티비", orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -271,7 +284,7 @@ class MainActivity: BaseActivity() {
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
 
-                                        controlLight(orderManager.control)
+                                        sendData("조명", orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -295,7 +308,7 @@ class MainActivity: BaseActivity() {
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
 
-                                        controlGas(orderManager.control)
+                                        sendData("가스레인지", orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -319,7 +332,7 @@ class MainActivity: BaseActivity() {
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
 
-                                        controlBuy()
+                                        sendData("주문", true)
                                     }, 1500)
                                 }
                                 else {
@@ -375,35 +388,5 @@ class MainActivity: BaseActivity() {
 
             }
         }, 1500)
-    }
-
-    private fun controlTv(value: Boolean) {
-        if(value) {
-
-        }
-        else {
-
-        }
-    }
-
-    private fun controlLight(value: Boolean) {
-        if(value) {
-
-        }
-        else {
-
-        }
-    }
-
-    private fun controlGas(value: Boolean) {
-        if(value) {
-
-        }
-        else {
-
-        }
-    }
-
-    private fun controlBuy() {
     }
 }
