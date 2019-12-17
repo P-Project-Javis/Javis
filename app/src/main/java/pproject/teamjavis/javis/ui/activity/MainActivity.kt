@@ -11,6 +11,8 @@
 package pproject.teamjavis.javis.ui.activity
 
 import android.Manifest
+import android.app.Activity
+import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -39,6 +41,7 @@ class MainActivity: BaseActivity() {
 
     private val permissions = ArrayList<String>()
     private val permissionParam = 1
+    private val bluetoothParam = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,10 +92,24 @@ class MainActivity: BaseActivity() {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
-
         if(Build.VERSION.SDK_INT >= 23) {
             checkPermission(permissionList)
         }
+
+        checkBluetooth()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode) {
+            bluetoothParam -> {
+                if(requestCode == Activity.RESULT_OK) {
+
+                }
+                else if(requestCode == Activity.RESULT_CANCELED)
+                    finish()
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -121,6 +138,25 @@ class MainActivity: BaseActivity() {
             true
         } else
             false
+    }
+
+    private fun checkBluetooth() {
+        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if(bluetoothAdapter == null) {
+            makeToast("블루투스가 지원되지 않는 장비에서는 사용할 수 없습니다")
+            finish()
+        }
+
+        if(!bluetoothAdapter.isEnabled) {
+            val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(intent, bluetoothParam)
+        }
+
+        val pairedDevices = bluetoothAdapter.bondedDevices
+        if(pairedDevices.isEmpty()) {
+            makeToast("블루투스 페어링 된 장치가 없습니다 먼저 페어링을 해 주세요")
+            finish()
+        }
     }
 
     private fun updateView(id: Int) {
