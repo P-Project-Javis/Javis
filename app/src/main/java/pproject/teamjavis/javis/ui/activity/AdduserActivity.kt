@@ -12,7 +12,6 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
 import kotlinx.android.synthetic.main.layout_topbar.*
 import pproject.teamjavis.javis.R
-import pproject.teamjavis.javis.util.CallApi
 import pproject.teamjavis.javis.util.api.SetVoiceApi
 import pproject.teamjavis.javis.util.manager.DatabaseManager
 import pproject.teamjavis.javis.util.manager.RecordManager
