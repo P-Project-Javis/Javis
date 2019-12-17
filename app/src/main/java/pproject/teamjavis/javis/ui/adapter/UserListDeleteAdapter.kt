@@ -2,14 +2,17 @@ package pproject.teamjavis.javis.ui.adapter
 
 import android.content.Context
 import android.os.Environment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import pproject.teamjavis.javis.R
 import pproject.teamjavis.javis.ui.item.AuthorityParentItem
+import pproject.teamjavis.javis.util.api.DeleteVoiceApi
 import pproject.teamjavis.javis.util.manager.DatabaseManager
 import java.io.File
 
@@ -32,15 +35,28 @@ class UserListDeleteAdapter: BaseAdapter() {
 
         name.text = item.name
         button.setOnClickListener {
-            val db = DatabaseManager(context)
-            db.openWritable()
-            db.delete(item.name)
-            db.close()
-            val file = File(Environment.getExternalStorageDirectory(), "/Javis/${item.name}.wav")
-            if(file.exists())
-                file.delete()
-            items.removeAt(position)
-            notifyDataSetChanged()
+            val deleteVoice = DeleteVoiceApi(context, item.name)
+            deleteVoice.connect()
+
+            Handler().postDelayed( {
+                if(deleteVoice.isSuccess) {
+                    val db = DatabaseManager(context)
+                    db.openWritable()
+                    db.delete(item.name)
+                    db.close()
+                    val file = File(Environment.getExternalStorageDirectory(), "/Javis/${item.name}.wav")
+                    if(file.exists())
+                        file.delete()
+                    items.removeAt(position)
+                    notifyDataSetChanged()
+                }
+                else {
+                    Toast.makeText(context, "서버에서 데이터를 삭제하지 못했습니다", Toast.LENGTH_LONG).show()
+                }
+            }, 1500)
+
+
+
         }
 
         return view

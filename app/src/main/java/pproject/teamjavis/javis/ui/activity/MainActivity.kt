@@ -164,12 +164,14 @@ class MainActivity: BaseActivity() {
             if(recog.isSuccess) {
                 if(voiceId != "__no__match__") {
                     //voiceId가 no match가 아니면
+                    makeToast(voiceId)
+                    log("보이스 ID:$voiceId")
                     val orderManager = OrderManager()
                     val order = orderManager.understandOrder(stt.result)
                     val db = DatabaseManager(applicationContext)
                     db.openReadable()
                     //db에서 voiceId와 일치하는 이름이 있는지 확인
-                    if(db.checkName(voiceId)) {
+                    if(!db.checkName(voiceId)) {
                         //db에 이름이 있는 경우
                         val kind = orderManager.kind
                         when(kind) {
@@ -194,7 +196,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
@@ -218,7 +220,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
@@ -242,7 +244,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
@@ -266,7 +268,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)

@@ -181,6 +181,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public boolean checkTv(String name) {
         AuthorityParentItem item = select(name);
+        if(item == null)
+            return false;
         ArrayList<AuthorityChildItem> list = item.getAuthorityList();
 
         if(list.get(0).isChecked())
@@ -191,6 +193,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public boolean checkLight(String name) {
         AuthorityParentItem item = select(name);
+        if(item == null)
+            return false;
         ArrayList<AuthorityChildItem> list = item.getAuthorityList();
 
         if(list.get(1).isChecked())
@@ -201,6 +205,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public boolean checkGas(String name) {
         AuthorityParentItem item = select(name);
+        if(item == null)
+            return false;
         ArrayList<AuthorityChildItem> list = item.getAuthorityList();
 
         if(list.get(2).isChecked())
@@ -211,6 +217,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public boolean checkBuy(String name) {
         AuthorityParentItem item = select(name);
+        if(item == null)
+            return false;
         ArrayList<AuthorityChildItem> list = item.getAuthorityList();
 
         if(list.get(3).isChecked())

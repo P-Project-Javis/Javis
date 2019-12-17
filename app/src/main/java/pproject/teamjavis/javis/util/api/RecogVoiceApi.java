@@ -2,7 +2,6 @@ package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -11,7 +10,6 @@ import java.io.File;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import pproject.teamjavis.javis.R;
 import pproject.teamjavis.javis.util.item.RecogVoiceItem;
 import retrofit2.Call;
@@ -47,7 +45,6 @@ public class RecogVoiceApi {
                 if(response.isSuccessful()) {
                     isSuccess = true;
                     voiceId = parser(response.body().toString());
-
                 }
                 else {
                     isSuccess = false;

@@ -6,6 +6,7 @@
 package pproject.teamjavis.javis.ui.activity
 
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.view.View
 import kotlinx.android.synthetic.main.activity_adduser.*
@@ -15,6 +16,7 @@ import pproject.teamjavis.javis.util.CallApi
 import pproject.teamjavis.javis.util.api.SetVoiceApi
 import pproject.teamjavis.javis.util.manager.DatabaseManager
 import pproject.teamjavis.javis.util.manager.RecordManager
+import java.io.File
 
 class AdduserActivity: BaseActivity() {
     private var isNameChecked = false
@@ -94,23 +96,27 @@ class AdduserActivity: BaseActivity() {
     }
 
     private fun addUser() {
-        val setVoice = SetVoiceApi(applicationContext, name)
-        setVoice.connect()
-        /*
-        Handler().postDelayed( {
-            if(setVoice.isSuccess) {
-                val db = DatabaseManager(applicationContext)
-                db.openWritable()
-                db.insert(name, name, 1, 1, 0, 0)
-                db.close()
-                makeToast("사용자 등록이 완료되었습니다")
-                finish()
-            }
-            else {
-                makeToast("사용자 등록에 실패했습니다")
-                finish()
-            }
-        }, 60000)
-        */
+        //Handler().postDelayed( {
+            val setVoice = SetVoiceApi(applicationContext, name)
+            setVoice.connect()
+
+            Handler().postDelayed( {
+                if(setVoice.isSuccess) {
+                    val db = DatabaseManager(applicationContext)
+                    db.openWritable()
+                    db.insert(name, name, 1, 1, 0, 0)
+                    db.close()
+                    //makeToast("사용자 등록이 완료되었습니다")
+                    finish()
+                }
+                else {
+                    val file = File(Environment.getExternalStorageDirectory(), "/Javis/$name.wav")
+                    if(file.exists())
+                        file.delete()
+                    //makeToast("사용자 등록에 실패했습니다")
+                    finish()
+                }
+            }, 1500)
+        //}, 500)
     }
 }
