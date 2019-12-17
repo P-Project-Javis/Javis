@@ -38,7 +38,7 @@ public class SetVoiceApi {
         Log.v(this.getClass().getSimpleName(), "SetVoice 실행");
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "test");
         RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), fileName);
 
         final RetroFitConnection connection = new RetroFitConnection();
@@ -49,19 +49,15 @@ public class SetVoiceApi {
                 Gson gson = new Gson();
                 if(response.isSuccessful()) {
                     isSuccess = true;
-                    Log.v(this.getClass().getSimpleName(), "SetVoice 성공");
                 }
                 else {
                     isSuccess = false;
-                    Log.v(this.getClass().getSimpleName(), "SetVoice 서버와의 연결은 되었으나 실패");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 isSuccess = false;
-                Log.v(this.getClass().getSimpleName(), "SetVoice 서버와의 연결이 실패");
-                Log.v(this.getClass().getSimpleName(), "SetVoice 종료2");
             }
         });
         Log.v(this.getClass().getSimpleName(), "SetVoice 종료");

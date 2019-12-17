@@ -25,7 +25,7 @@ public class DeleteVoiceApi {
         DeleteVoiceItem request = new DeleteVoiceItem();
         request.setApiId(context.getString(R.string.api_id));
         request.setApiKey(context.getString(R.string.api_key));
-        request.setDbId("javis");
+        request.setDbId("test");
         request.setVoiceId(voiceId);
 
         final RetroFitConnection connection = new RetroFitConnection();

@@ -194,7 +194,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
@@ -218,7 +218,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
@@ -242,7 +242,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
@@ -266,7 +266,7 @@ class MainActivity: BaseActivity() {
                                     tts.connect()
                                     Handler().postDelayed( {
                                         main_mic.setImageResource(R.drawable.ic_mic_none_black_48dp)
-                                        main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
+                                        main_message.text = "권한이 없습니다\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
                                     }, 1500)
