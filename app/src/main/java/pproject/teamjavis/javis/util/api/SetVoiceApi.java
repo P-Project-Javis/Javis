@@ -35,7 +35,6 @@ public class SetVoiceApi {
     }
 
     public void connect() {
-        Log.v(this.getClass().getSimpleName(), "SetVoice 실행");
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
         RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
@@ -49,11 +48,9 @@ public class SetVoiceApi {
                 Gson gson = new Gson();
                 if(response.isSuccessful()) {
                     isSuccess = true;
-                    //Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
                 }
                 else {
                     isSuccess = false;
-                    //Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -62,7 +59,6 @@ public class SetVoiceApi {
                 isSuccess = false;
             }
         });
-        Log.v(this.getClass().getSimpleName(), "SetVoice 종료");
     }
 
     public boolean getIsSuccess() {
