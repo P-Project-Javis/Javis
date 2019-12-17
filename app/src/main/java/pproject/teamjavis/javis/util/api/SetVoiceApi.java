@@ -2,15 +2,18 @@ package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
 import android.os.Environment;
-import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.io.File;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import pproject.teamjavis.javis.R;
+import pproject.teamjavis.javis.util.item.SetVoiceItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,29 +30,32 @@ public class SetVoiceApi {
         this.context = context;
         this.fileName = fileName;
         file = new File(Environment.getExternalStorageDirectory(), "/Javis/" + fileName + ".wav");
-        requestFile = RequestBody.create(MediaType.parse("multipart/from-data"), file);
+        requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         uploadFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
     }
 
     public void connect() {
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "???");
-        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), "javis" + fileName);
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
+        RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), fileName);
 
         final RetroFitConnection connection = new RetroFitConnection();
-        Call<ResponseBody> call = connection.setVoice.exec(apiId, apiKey, dbId, voiceId, uploadFile);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<SetVoiceItem> call = connection.setVoice.exec(apiId, apiKey, dbId, voiceId, uploadFile);
+        call.enqueue(new Callback<SetVoiceItem>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful())
+            public void onResponse(Call<SetVoiceItem> call, Response<SetVoiceItem> response) {
+                Gson gson = new Gson();
+                if(response.isSuccessful()) {
                     isSuccess = true;
-                else
+                }
+                else {
                     isSuccess = false;
+                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<SetVoiceItem> call, Throwable t) {
                 isSuccess = false;
             }
         });
