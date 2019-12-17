@@ -34,7 +34,7 @@ public class RecogVoiceApi {
     public void connect() {
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javisvoice");
 
         final RetroFitConnection connection = new RetroFitConnection();
         Call<RecogVoiceItem> call = connection.recogVoice.exec(apiId, apiKey, dbId, uploadFile);
