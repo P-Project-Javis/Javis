@@ -2,8 +2,8 @@ package pproject.teamjavis.javis.util.api;
 
 import android.content.Context;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -12,8 +12,8 @@ import java.io.File;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import pproject.teamjavis.javis.R;
+import pproject.teamjavis.javis.util.item.SetVoiceItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,25 +38,27 @@ public class SetVoiceApi {
         Log.v(this.getClass().getSimpleName(), "SetVoice 실행");
         RequestBody apiId = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_id));
         RequestBody apiKey = RequestBody.create(MediaType.parse("text/plain"), context.getString(R.string.api_key));
-        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "test");
+        RequestBody dbId = RequestBody.create(MediaType.parse("text/plain"), "javis");
         RequestBody voiceId = RequestBody.create(MediaType.parse("text/plain"), fileName);
 
         final RetroFitConnection connection = new RetroFitConnection();
-        Call<ResponseBody> call = connection.setVoice.exec(apiId, apiKey, dbId, voiceId, uploadFile);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<SetVoiceItem> call = connection.setVoice.exec(apiId, apiKey, dbId, voiceId, uploadFile);
+        call.enqueue(new Callback<SetVoiceItem>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<SetVoiceItem> call, Response<SetVoiceItem> response) {
                 Gson gson = new Gson();
                 if(response.isSuccessful()) {
                     isSuccess = true;
+                    Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
                 }
                 else {
                     isSuccess = false;
+                    Toast.makeText(context, response.body().toString(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<SetVoiceItem> call, Throwable t) {
                 isSuccess = false;
             }
         });

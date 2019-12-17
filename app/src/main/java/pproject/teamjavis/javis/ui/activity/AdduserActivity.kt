@@ -106,14 +106,14 @@ class AdduserActivity: BaseActivity() {
                     db.openWritable()
                     db.insert(name, name, 1, 1, 0, 0)
                     db.close()
-                    makeToast("사용자 등록이 완료되었습니다")
+                    //makeToast("사용자 등록이 완료되었습니다")
                     finish()
                 }
                 else {
                     val file = File(Environment.getExternalStorageDirectory(), "/Javis/$name.wav")
                     if(file.exists())
                         file.delete()
-                    makeToast("사용자 등록에 실패했습니다")
+                    //makeToast("사용자 등록에 실패했습니다")
                     finish()
                 }
             }, 1500)
