@@ -165,12 +165,13 @@ class MainActivity: BaseActivity() {
                 if(voiceId != "__no__match__") {
                     //voiceId가 no match가 아니면
                     makeToast(voiceId)
+                    log("보이스 ID:$voiceId")
                     val orderManager = OrderManager()
                     val order = orderManager.understandOrder(stt.result)
                     val db = DatabaseManager(applicationContext)
                     db.openReadable()
                     //db에서 voiceId와 일치하는 이름이 있는지 확인
-                    if(db.checkName(voiceId)) {
+                    if(!db.checkName(voiceId)) {
                         //db에 이름이 있는 경우
                         val kind = orderManager.kind
                         when(kind) {
