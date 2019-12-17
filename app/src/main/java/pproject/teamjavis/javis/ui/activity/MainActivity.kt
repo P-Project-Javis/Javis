@@ -13,6 +13,8 @@ package pproject.teamjavis.javis.ui.activity
 import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -33,6 +35,11 @@ import pproject.teamjavis.javis.util.manager.RecordManager
 import pproject.teamjavis.javis.util.api.STTApi
 import pproject.teamjavis.javis.util.api.TTSApi
 import pproject.teamjavis.javis.util.manager.DatabaseManager
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity: BaseActivity() {
     private var isMenuOpen = false
@@ -42,6 +49,8 @@ class MainActivity: BaseActivity() {
     private val permissions = ArrayList<String>()
     private val permissionParam = 1
     private val bluetoothParam = 2
+    private var socket: BluetoothSocket? = null
+    private var outputStream: OutputStream? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,6 +165,20 @@ class MainActivity: BaseActivity() {
         if(pairedDevices.isEmpty()) {
             makeToast("블루투스 페어링 된 장치가 없습니다 먼저 페어링을 해 주세요")
             finish()
+        }
+        var device: BluetoothDevice? = null
+        for(selectedDevice in pairedDevices) {
+            device = selectedDevice
+        }
+
+        val uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
+        try {
+            socket = device!!.createRfcommSocketToServiceRecord(uuid)
+            socket!!.connect()
+            outputStream = socket!!.outputStream
+        }
+        catch (e: IOException) {
+            e.stackTrace
         }
     }
 
