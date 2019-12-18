@@ -3,8 +3,8 @@
 
 본 프로젝트는 가천대학교 P-Project 수업에서 진행한 팀 프로젝트입니다.
 
-* 팀장: 천재웅
-* 팀원: 배민수, 최지민, 임지수
+* 팀장: [천재웅](https://github.com/entimer)
+* 팀원: [배민수](https://github.com/Minsu-Bae), [최지민](https://github.com/jjimin327), [임지수](https://github.com/ohyeah2580)
 
 ### 개발기간
 2019.11.25 ~ 2019.12.18
