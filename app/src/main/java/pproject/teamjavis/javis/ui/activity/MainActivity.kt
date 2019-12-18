@@ -11,10 +11,6 @@
 package pproject.teamjavis.javis.ui.activity
 
 import android.Manifest
-import android.app.Activity
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -35,11 +31,6 @@ import pproject.teamjavis.javis.util.manager.RecordManager
 import pproject.teamjavis.javis.util.api.STTApi
 import pproject.teamjavis.javis.util.api.TTSApi
 import pproject.teamjavis.javis.util.manager.DatabaseManager
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
-import java.lang.Exception
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity: BaseActivity() {
@@ -49,9 +40,6 @@ class MainActivity: BaseActivity() {
 
     private val permissions = ArrayList<String>()
     private val permissionParam = 1
-    private val bluetoothParam = 2
-    private var socket: BluetoothSocket? = null
-    private var outputStream: OutputStream? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,21 +93,6 @@ class MainActivity: BaseActivity() {
         if(Build.VERSION.SDK_INT >= 23) {
             checkPermission(permissionList)
         }
-
-        checkBluetooth()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when(requestCode) {
-            bluetoothParam -> {
-                if(requestCode == Activity.RESULT_OK) {
-
-                }
-                else if(requestCode == Activity.RESULT_CANCELED)
-                    finish()
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -148,51 +121,6 @@ class MainActivity: BaseActivity() {
             true
         } else
             false
-    }
-
-    private fun checkBluetooth() {
-        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if(bluetoothAdapter == null) {
-            makeToast("블루투스가 지원되지 않는 장비에서는 사용할 수 없습니다")
-            finish()
-        }
-
-        if(!bluetoothAdapter.isEnabled) {
-            val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            startActivityForResult(intent, bluetoothParam)
-        }
-
-        val pairedDevices = bluetoothAdapter.bondedDevices
-        if(pairedDevices.isEmpty()) {
-            makeToast("블루투스 페어링 된 장치가 없습니다 먼저 페어링을 해 주세요")
-            finish()
-        }
-        var device: BluetoothDevice? = null
-        for(selectedDevice in pairedDevices) {
-            device = selectedDevice
-        }
-
-        val uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
-        try {
-            socket = device!!.createRfcommSocketToServiceRecord(uuid)
-            socket!!.connect()
-            outputStream = socket!!.outputStream
-        }
-        catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun sendData(kind: String, control: Boolean) {
-        val strControl = control.toString()
-        val data = "$kind,$strControl\n"
-
-        try {
-            outputStream!!.write(data.toByteArray())
-        }
-        catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     private fun updateView(id: Int) {
@@ -258,8 +186,6 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
-
-                                        sendData("티비", orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -283,8 +209,6 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
-
-                                        sendData("조명", orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -307,8 +231,6 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
-
-                                        sendData("가스레인지", orderManager.control)
                                     }, 1500)
                                 }
                                 else {
@@ -331,8 +253,6 @@ class MainActivity: BaseActivity() {
                                         main_message.text = "$order\n\n계속하려면 이미지를 누른 후 말해주세요"
                                         val player = PlayManager(applicationContext, "response")
                                         player.play()
-
-                                        sendData("주문", true)
                                     }, 1500)
                                 }
                                 else {
@@ -385,7 +305,6 @@ class MainActivity: BaseActivity() {
                     val player = PlayManager(applicationContext, "response")
                     player.play()
                 }, 1500)
-
             }
         }, 1500)
     }
