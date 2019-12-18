@@ -36,7 +36,7 @@ P-Project가 4주라는 짧은 기간이라는 점과 팀의 기술력 부족 �
 
 ![](https://github.com/P-Project-Javis/Javis/blob/master/screenshots/screenshot_authority_setting.jpg)
 
-등록된 모든 사용자는 권한 설정이 가능합니다. 권한을 켜고 끄면 즉시 DB에 반영되며, 권한이 없는 명령은 수행하지 않습니다. 새 사용자 등록시 기본 권한은 on, on, off, off입니다.
+등록된 모든 사용자는 권한 설정이 가능합니다. 권한을 켜고 끄면 즉시 DB에 반영되며, 권한이 없는 명령은 수행하지 않습니다. 새 사용자 등록시 기본 권한은 on(TV), on(조명), off(가스레인지), off(온라인 주문)입니다.
 
 * 명령 수행 시
 
